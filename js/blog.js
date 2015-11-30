@@ -1,7 +1,7 @@
-$(function(){
-  //Declare blog obj variable
-  var blog = blog ||{};
 
+  //Declare blog obj variable
+var blog = blog ||{};
+$(function(){
   //Contructor for article objects
   function article(title, category, author, authorURL, publishedOn, body){
     this.title = title;
@@ -24,6 +24,8 @@ $(function(){
 
   //function to go through blogArticles.js, pick out article, create objs, sort and call toHTML()
   blog.makeArticle = function (){
+    for (var ii =0; ii<this.rawData.length; ii++){
 
+    }
   };
 });
