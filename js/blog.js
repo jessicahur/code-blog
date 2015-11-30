@@ -16,9 +16,9 @@ $(function(){
     $blogAr = $('.arTemplate').clone();
     $blogAr.removeClass('arTemplate');
     $blogAr.find('h1').text(this.title);
-    $blogAr.find('.author').text(this.author);
+    $blogAr.find('.author').text('author: '+this.author);
     $blogAr.find('.URL').text(this.authorUrl);
-    $blogAr.find('.category').text(this.category);
+    $blogAr.find('.category').text('category: '+this.category);
     $blogAr.find('time').text('published on: '+this.timeStamp);
     $blogAr.find('.article-body').html(this.body);
     return $blogAr;
