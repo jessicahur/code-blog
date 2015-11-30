@@ -13,9 +13,12 @@ $(function(){
   };
 
   //function to insert article obj content into index.html
-  blog.makeArticle = function (article){
-    var blogAr = $('#articles').clone();
-    blogAr.find('h1').text(article.title);
+  article.prototype.toHtml = function (article){
+    var $blogAr = $('#articles').clone();
+    $blogAr.find('h1').text(article.title);
+    $blogAr.find('.author').text(article.author);
+    $blogAr.find('.URL').text(article.authorURL);
+    $blogAr.find('.category').text(article.category);
   };
 
 });
