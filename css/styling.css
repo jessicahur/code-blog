@@ -75,7 +75,11 @@ img.pull-right{
 /********************
 ****Day 2 Styling****
 ********************/
-a.readOn{
-  font-size: 1.5em;
+.readOn{
+  font-size: 1em;
   opacity: 0.5;
+}
+
+.hidden{
+  display:none;
 }
