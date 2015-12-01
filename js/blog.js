@@ -6,7 +6,7 @@ $(function(){
     this.title = obj.title;
     this.category = obj.category;
     this.author = obj.author;
-    this.authorURL = obj.authorURL;
+    this.authorURL = obj.authorUrl;
     this.timeStamp = obj.publishedOn;
     this.body = obj.body;
   };
@@ -17,7 +17,7 @@ $(function(){
     $blogAr.removeClass('arTemplate');
     $blogAr.find('h1').text(this.title);
     $blogAr.find('.author').text('author: '+this.author);
-    $blogAr.find('.URL').text(this.authorUrl);
+    $blogAr.find('.URL').text(this.authorURL);
     $blogAr.find('.category').text('category: '+this.category);
     $blogAr.find('time').text('published on: '+this.timeStamp);
     $blogAr.find('.article-body').html(this.body);
