@@ -72,3 +72,10 @@ img.pull-right{
     padding: 10px;
   }
 }
+/********************
+****Day 2 Styling****
+********************/
+a.readOn{
+  font-size: 1.5em;
+  opacity: 0.5;
+}

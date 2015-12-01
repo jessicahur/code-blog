@@ -15,6 +15,7 @@ $(function(){
   article.prototype.toHtml = function (){
     $blogAr = $('.arTemplate').clone();
     $blogAr.removeClass('arTemplate');
+    $blogAr.addClass('article');
     $blogAr.find('h1').text(this.title);
     $blogAr.find('.author').html('<b>Author:</b> '+this.author);
     $blogAr.find('.URL').html('<a href=\'this.authorURL\'>'+this.authorURL+'</a>');
@@ -46,5 +47,20 @@ $(function(){
       $('#articles').prepend(articlesArray[nn].toHtml());
     }
   };
+  //function setTeaser
+  blog.setTeaser = function(){
+    var $articleBody=$('.article').children(':not(header)');
+    var $articleHide=$articleBody.children(':not(:first-child)');
+    $articleHide.hide();
+    $articleBody.each(function(){
+      $(this).append('<a class="readOn">read on ...</a>');
+    });
+    $('.readOn').css({
+      'font-size':'1em',
+      'opacity':'0.5'
+    });
+  };
+
   blog.makeArticle();
+  blog.setTeaser();
 });

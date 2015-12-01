@@ -1,4 +1,8 @@
 var Util = Util || {};
-Util.hidePara=function(){
+Util.hideP=function(){
+  $('.article').each( function(){
+    var $article=$('.article').children(':not(header)').children(':not(:first-child)');
+    $article.hide();
 
+  });
 };
