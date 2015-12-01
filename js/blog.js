@@ -27,27 +27,20 @@ $(function(){
 
   //function to go through blogArticles.js, pick out article, create objs, sort and call toHTML()
   blog.makeArticle = function (){
-    var tempArticlesArray = [];
     var articlesArray = [];
-    var timeStampArray = [];
     //creating article obj and push them in tempArticlesArray
     for (var ii =0; ii<this.rawData.length; ii++){
       var newArticle = new article(this.rawData[ii]);
-      tempArticlesArray.push(newArticle);
-      timeStampArray.push(this.rawData[ii].publishedOn);
+      articlesArray.push(newArticle);
     }
-    timeStampArray.sort();
-    //sorting articles based on sorted timeStamp array
-    for (var jj=0; jj<timeStampArray.length;jj++){
-      for (var kk=0; kk<tempArticlesArray.length; kk++){
-        if (timeStampArray[jj]===tempArticlesArray[kk].timeStamp){
-          articlesArray.push(tempArticlesArray[kk]);
-          tempArticlesArray.splice(kk,1);
-          console.log('tempArticlesArray length is now: '+tempArticlesArray.length);
-          break;
-        }
-      }
-    }
+    //New sorting algorithm
+    var compare = function(a,b){
+      if (a.timeStamp > b.timeStamp){return 1;};
+      if (a.timeStamp < b.timeStamp){return -1;};
+      return 0;
+    };
+    articlesArray.sort(compare);
+
     //Inserting articles into blog
     for (var nn=0; nn<articlesArray.length; nn++){
       $('#articles').prepend(articlesArray[nn].toHtml());
