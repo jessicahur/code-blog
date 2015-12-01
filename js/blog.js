@@ -161,6 +161,10 @@ $(function(){
     }
   });
 
+  //Event listener for clear filter button
+  $('button').on('click', function(){
+    $('.article').show();
+  });
   //Event listener for About The Author
   $('#about').on('click', function(){
     $('.about').show();

@@ -25,6 +25,10 @@ nav a {
   text-decoration: none;
   color: inherit;
 }
+.article h1{
+  background-color: silver;
+  padding: 10px;
+}
 .author, .URL{
   display: inline;
 }
@@ -32,7 +36,7 @@ nav a {
   display: none;
 }
 article{
-  border-bottom: solid 1px silver;
+  /*border-bottom: solid 1px silver;*/
   padding-bottom: 10px;
 }
 article::after{
