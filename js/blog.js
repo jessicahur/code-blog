@@ -43,6 +43,7 @@ $(function(){
         if (timeStampArray[jj]===tempArticlesArray[kk].timeStamp){
           articlesArray.push(tempArticlesArray[kk]);
           tempArticlesArray.splice(kk,1);
+          console.log('tempArticlesArray length is now: '+tempArticlesArray.length);
           break;
         }
       }
