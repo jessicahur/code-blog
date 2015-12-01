@@ -19,9 +19,9 @@ $(function(){
     $blogAr.removeClass('arTemplate');
     $blogAr.addClass('article');
     $blogAr.find('h1').text(this.title);
-    $blogAr.find('.author').html('<b>Author:</b> '+this.author);
+    $blogAr.find('.author').html('<b>'+this.author+'</b>');
     $blogAr.find('.URL').html('<a href=\'this.authorURL\'>'+this.authorURL+'</a>');
-    $blogAr.find('.category').text('category: '+this.category);
+    $blogAr.find('.category').text(this.category);
     $blogAr.find('time').text('Published on: '+this.timeStamp + ' ('+
     parseInt((new Date() - new Date(this.timeStamp))/60/60/24/1000) + ' days ago)');
     $blogAr.find('.article-body').html(this.body);
@@ -120,7 +120,6 @@ $(function(){
     $less.parent().children('.hidden').removeClass('tempAvail');
     $('.hidden').css('display','none');
   });
-});
 
   //Event listener for author selection
   $('.authorFilter').on('change', function(){
@@ -132,5 +131,35 @@ $(function(){
     }
     else{
       $article.hide();
+      var $authors = $('.author');
+      $authors.each(function(){
+        var text = $(this).text();
+        if(text===author){
+          $(this).parent().parent().parent().show();
+        }
+      });
     }
   });
+
+  //Event listener for category selection
+  $('.categoryFilter').on('change',function(){
+    var category = $(this).val();
+    var $articles = $('.article');
+    console.log(category);
+    if (category==='--None--'){
+      $articles.show();
+    }
+    else{
+      $articles.hide();
+      var $categories = $('.category');
+      $categories.each(function(){
+        var text = $(this).text();
+        if(text===category){
+          $(this).parent().parent().parent().show();
+        }
+      });
+    }
+  });
+
+  /***End of ready function here***/
+});
