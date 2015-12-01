@@ -1,0 +1,74 @@
+/********************
+****Day 1 Styling****
+********************/
+/*body{
+  background-color: #F2AE72;
+}*/
+.header{
+  text-align: center;
+  /*background-color: #F2E394;*/
+}
+nav{
+  background-color: #588C7E;
+  padding: 5px;
+  text-align: center;
+}
+nav > ul{
+  list-style-type: none;
+}
+nav li {
+  display: inline-block;
+  padding: 0 20px;
+  font-size: 1.25em;
+}
+nav a {
+  text-decoration: none;
+}
+.author, .URL{
+  display: inline;
+}
+.arTemplate{
+  display: none;
+}
+article{
+  border-bottom: solid 1px silver;
+  padding-bottom: 10px;
+}
+article::after{
+  content: "";
+  display:table;
+  clear: both;
+}
+img{
+  max-width:300px;
+  max-height:200px;
+}
+img.pull-left{
+  float: left;
+  padding-top: 10px;
+  padding-right: 10px;
+  clear:left;
+}
+img.pull-right{
+  float: right;
+  padding-top: 10px;
+  padding-left: 10px;
+  clear: right;
+}
+@media screen and (max-width: 480px) {
+  nav>ul{
+    padding: 0;
+  }
+  nav li {
+    display: block;
+    padding: 5px;
+  }
+  img, img.pull-left, img.pull-right{
+    max-width: 200px;
+    max-height: 200px;
+    float: none;
+    display: block;
+    margin: auto;
+    padding: 10px;
+  }
+}

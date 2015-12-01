@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Day1 Blog</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
+  <link href="css/styling.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+  <!--*************Blog Title**************-->
+  <div class="header">
+    <div class="title">
+      <h1>Kilovolt Blog!</h1>
+      <h2>The shocking power of static pages</h2>
+    </div>
+    <!--**********Navigation Bar***********-->
+    <nav>
+      <ul>
+        <li>Articles</li>
+        <li>About (comming soon)</li>
+        <li><a>Twitter</a></li>
+        <li><a href="http://github.com">Github</a></li>
+      </ul>
+    </nav>
+  </div>
+  <!--**********Articles Section********** -->
+  <section id="articles">
+    <article class="arTemplate">
+      <header>
+        <h1>Title</h1>
+        <div class="details">
+          <p><time pubdate datetime="2000-01-01">Publish Time</time></p>
+          <p class="author"></p>
+          <p class="URL"></p>
+          <p class="category"></p>
+        </div>
+      </header>
+      <section class="article-body">Body</section>
+    </article>
+  </section>
+  <!--**********Articles Section Ends Here********** -->
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/blogObj.js"></script>
+  <script src="js/blogArticles.js"></script>
+  <script src="js/blog.js"></script>
+
+</body>
+
+</html>
