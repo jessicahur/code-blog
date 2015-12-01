@@ -1,0 +1,28 @@
+/**
+** Day 1 Styling*
+**/
+
+.arTemplate{
+  display: none;
+}
+article{
+  border-bottom: solid 1px silver;
+  padding-bottom: 10px;
+}
+article::after{
+  content: "";
+  display:table;
+  clear: both;
+}
+img{
+  max-width:300px;
+  max-height:200px;
+}
+img.pull-left{
+  float: left;
+  padding-right: 10px;
+}
+img.pull-right{
+  float: right;
+  padding-left: 10px;
+}
