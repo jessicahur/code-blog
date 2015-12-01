@@ -65,7 +65,7 @@ $(function(){
   //function Filter create filter lists for both author and category
   blog.filters = function(){
     //Filter out authors
-    var compareAuthor = function(a,b){
+    var compareAuthor = function(a,b,prop){
       if (a.author < b.author){return -1;};
       if (a.author > b.author){return 1;};
       return 0;
@@ -73,8 +73,11 @@ $(function(){
     var tempArticlesArray = articlesArray.slice();
     tempArticlesArray.sort(compareAuthor);
     var authors = Util.uniqueItem(tempArticlesArray,"author");
-    console.log(tempArticlesArray);
     console.log(authors);
+    var $authorSelect=$('.authorFilter');
+    for (var ii=0; ii<authors.length;ii++){
+      $authorSelect.append("<option>"+authors[ii]+"</option>");
+    }
     //filter out category
     var compareCategory = function(a,b){
       if (a.category < b.category){return -1;};
@@ -84,6 +87,10 @@ $(function(){
     tempArticlesArray.sort(compareCategory);
     var categories = Util.uniqueItem(tempArticlesArray,"category");
     console.log(categories);
+    var $categorySelect=$('.categoryFilter');
+    for (var ii=0; ii<categories.length;ii++){
+      $categorySelect.append("<option>"+categories[ii]+"</option>");
+    }
   };
 
   //function authorFilter grabbing articles of same author
@@ -114,3 +121,16 @@ $(function(){
     $('.hidden').css('display','none');
   });
 });
+
+  //Event listener for author selection
+  $('.authorFilter').on('change', function(){
+    var author = $(this).val();
+    var $article = $('.article');
+    console.log(author);
+    if (author==="--None--"){
+      $article.show();
+    }
+    else{
+      $article.hide();
+    }
+  });
