@@ -79,7 +79,10 @@ img.pull-right{
   font-size: 1em;
   opacity: 0.5;
 }
-
+.less{
+  font-size: 1em;
+  opacity: 0.5;
+}
 .hidden{
   display:none;
 }

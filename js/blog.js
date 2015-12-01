@@ -51,13 +51,19 @@ $(function(){
   //function setTeaser that hide all paragraphs after the
   //first one and add read on to the end of the article
   blog.setTeaser = function(){
-    $articleBody=$('.article').children(':not(header)');
-    $articleHide=$articleBody.children(':not(:first-child)');
+    var $articleBody=$('.article').children(':not(header)');
+    var $articleHide=$articleBody.children(':not(:first-child)');
     $articleHide.addClass('hidden');
     $('.hidden').css('display','none');
     $articleBody.each(function(){
-      $(this).append('<a class="readOn">read on ...</a>');
+      $(this).append('<a class="readOn">read on...</a>');
+      $(this).append('<a class="less">less...</a>');
     });
+    $('.less').hide();
+  };
+
+  blog.authorFilter = function(){
+    var $
   };
 
   blog.makeArticle();
@@ -70,15 +76,17 @@ $(function(){
     $readOn.parent().children('.hidden').addClass('tempAvail');
     $('.tempAvail').fadeIn();
     //$readOn.parent().append('<a class="less">less..</a>');
+    $readOn.next().show();
   });
 
-  /*
+
   //Event listener for clicking on less...
   $('.less').on('click', function(){
+    console.log("1");
     var $less = $(this);
-    $less.show();
-    $less.parent().children('.readOn').show();
+    $less.hide();
+    $less.prev().show();
     $less.parent().children('.hidden').removeClass('tempAvail');
     $('.hidden').css('display','none');
-  });*/
+  });
 });
