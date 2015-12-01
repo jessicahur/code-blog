@@ -58,18 +58,27 @@ $(function(){
     $articleBody.each(function(){
       $(this).append('<a class="readOn">read on ...</a>');
     });
-    $('.readOn').css({
-      'font-size':'1em',
-      'opacity':'0.5'
-    });
   };
 
   blog.makeArticle();
   blog.setTeaser();
 
+  //Event listener for clicking on Read On
   $('.readOn').on('click', function(){
-    $(this).hide();
-    $(this).parent().children('.hidden').addClass('tempAvail');
-    $('.tempAvail').show();
+    var $readOn = $(this);
+    $readOn.hide();
+    $readOn.parent().children('.hidden').addClass('tempAvail');
+    $('.tempAvail').fadeIn();
+    //$readOn.parent().append('<a class="less">less..</a>');
   });
+
+  /*
+  //Event listener for clicking on less...
+  $('.less').on('click', function(){
+    var $less = $(this);
+    $less.show();
+    $less.parent().children('.readOn').show();
+    $less.parent().children('.hidden').removeClass('tempAvail');
+    $('.hidden').css('display','none');
+  });*/
 });
