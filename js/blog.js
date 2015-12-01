@@ -31,7 +31,7 @@ $(function(){
   //function that go through blogArticles.js, pick out article,
   //create article objs, sort and call toHTML()
   blog.makeArticle = function (){
-    var articlesArray = [];
+    articlesArray = [];
     for (var ii =0; ii<this.rawData.length; ii++){
       var newArticle = new article(this.rawData[ii]);
       articlesArray.push(newArticle);
@@ -62,12 +62,37 @@ $(function(){
     $('.less').hide();
   };
 
+  //function Filter create filter lists for both author and category
+  blog.filters = function(){
+    //Filter out authors
+    var compareAuthor = function(a,b){
+      if (a.author < b.author){return -1;};
+      if (a.author > b.author){return 1;};
+      return 0;
+    };
+    var tempArticlesArray = articlesArray.slice();
+    tempArticlesArray.sort(compareAuthor);
+    var authors = Util.uniqueItem(tempArticlesArray,"author");
+    console.log(tempArticlesArray);
+    console.log(authors);
+    //filter out category
+    var compareCategory = function(a,b){
+      if (a.category < b.category){return -1;};
+      if (a.category > b.category){return 1;};
+      return 0;
+    };
+    tempArticlesArray.sort(compareCategory);
+    var categories = Util.uniqueItem(tempArticlesArray,"category");
+    console.log(categories);
+  };
+
+  //function authorFilter grabbing articles of same author
   blog.authorFilter = function(){
-    var $
   };
 
   blog.makeArticle();
   blog.setTeaser();
+  blog.filters();
 
   //Event listener for clicking on Read On
   $('.readOn').on('click', function(){
@@ -75,7 +100,6 @@ $(function(){
     $readOn.hide();
     $readOn.parent().children('.hidden').addClass('tempAvail');
     $('.tempAvail').fadeIn();
-    //$readOn.parent().append('<a class="less">less..</a>');
     $readOn.next().show();
   });
 
