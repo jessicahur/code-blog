@@ -1,5 +1,7 @@
 
-  //Declare blog obj variable
+/** Jessica Hur **/
+/***  Code 301 **/
+
 $(function(){
   //Contructor for article objects
   function article(obj){
@@ -26,32 +28,33 @@ $(function(){
     return $blogAr;
   };
 
-  //function to go through blogArticles.js, pick out article, create objs, sort and call toHTML()
+  //function that go through blogArticles.js, pick out article,
+  //create article objs, sort and call toHTML()
   blog.makeArticle = function (){
     var articlesArray = [];
-    //creating article obj and push them in tempArticlesArray
     for (var ii =0; ii<this.rawData.length; ii++){
       var newArticle = new article(this.rawData[ii]);
       articlesArray.push(newArticle);
     }
-    //New sorting algorithm
-    var compare = function(a,b){
+    var compare = function(a,b){   //New sorting algorithm
       if (a.timeStamp > b.timeStamp){return 1;};
       if (a.timeStamp < b.timeStamp){return -1;};
       return 0;
     };
     articlesArray.sort(compare);
 
-    //Inserting articles into blog
-    for (var nn=0; nn<articlesArray.length; nn++){
+    for (var nn=0; nn<articlesArray.length; nn++){   //Inserting articles into blog
       $('#articles').prepend(articlesArray[nn].toHtml());
     }
   };
-  //function setTeaser
+
+  //function setTeaser that hide all paragraphs after the
+  //first one and add read on to the end of the article
   blog.setTeaser = function(){
-    var $articleBody=$('.article').children(':not(header)');
-    var $articleHide=$articleBody.children(':not(:first-child)');
-    $articleHide.hide();
+    $articleBody=$('.article').children(':not(header)');
+    $articleHide=$articleBody.children(':not(:first-child)');
+    $articleHide.addClass('hidden');
+    $('.hidden').css('display','none');
     $articleBody.each(function(){
       $(this).append('<a class="readOn">read on ...</a>');
     });
@@ -63,4 +66,10 @@ $(function(){
 
   blog.makeArticle();
   blog.setTeaser();
+
+  $('.readOn').on('click', function(){
+    $(this).hide();
+    $(this).parent().children('.hidden').addClass('tempAvail');
+    $('.tempAvail').show();
+  });
 });
