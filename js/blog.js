@@ -16,10 +16,11 @@ $(function(){
     $blogAr = $('.arTemplate').clone();
     $blogAr.removeClass('arTemplate');
     $blogAr.find('h1').text(this.title);
-    $blogAr.find('.author').text('author: '+this.author);
-    $blogAr.find('.URL').text(this.authorURL);
+    $blogAr.find('.author').html('<b>Author:</b> '+this.author);
+    $blogAr.find('.URL').html('<a href=\'this.authorURL\'>'+this.authorURL+'</a>');
     $blogAr.find('.category').text('category: '+this.category);
-    $blogAr.find('time').text('published on: '+this.timeStamp);
+    $blogAr.find('time').text('Published on: '+this.timeStamp + ' ('+
+    parseInt((new Date() - new Date(this.timeStamp))/60/60/24/1000) + ' days ago)');
     $blogAr.find('.article-body').html(this.body);
     return $blogAr;
   };
