@@ -18,11 +18,12 @@ nav > ul{
 }
 nav li {
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 50px;
   font-size: 1.25em;
 }
 nav a {
   text-decoration: none;
+  color: inherit;
 }
 .author, .URL{
   display: inline;
@@ -75,6 +76,9 @@ img.pull-right{
 /********************
 ****Day 2 Styling****
 ********************/
+.about{
+  display: none;
+}
 .readOn{
   font-size: 1em;
   opacity: 0.5;

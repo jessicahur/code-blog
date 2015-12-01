@@ -126,7 +126,7 @@ $(function(){
     var author = $(this).val();
     var $article = $('.article');
     console.log(author);
-    if (author==="--None--"){
+    if (author==="--Author--"){
       $article.show();
     }
     else{
@@ -146,7 +146,7 @@ $(function(){
     var category = $(this).val();
     var $articles = $('.article');
     console.log(category);
-    if (category==='--None--'){
+    if (category==='--Category--'){
       $articles.show();
     }
     else{
@@ -161,5 +161,16 @@ $(function(){
     }
   });
 
+  //Event listener for About The Author
+  $('#about').on('click', function(){
+    $('.about').show();
+    $('.article').hide();
+  });
+
+  //Event listener for clicking Articles
+  $('#arHome').on('click', function(){
+    $('.about').hide();
+    $('.article').show();
+  })
   /***End of ready function here***/
 });
