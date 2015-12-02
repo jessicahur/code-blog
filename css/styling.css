@@ -6,6 +6,7 @@
 }*/
 .header{
   text-align: center;
+  /*background-image: url("../img/backgroundTitle.jpeg");
   /*background-color: #F2E394;*/
 }
 nav{
@@ -78,15 +79,27 @@ img.pull-right{
   display:none;
 }
 
-@media screen and (max-width: 480px) {
-  #title{
+@media screen and (max-width: 480px) and (min-width: 320px){
+  .header{
+    background-image: url("../img/fish-scales.jpeg");
+  }
+  .header:after{
+     content: " "; /* Older browser do not support empty content */
+     visibility: hidden;
+     display: block;
+     height: 0;
+     clear: both;
+  }
+  #title, nav{
     float:left;
   }
-  #title h2, nav{
-    font-size: 1em;
+  #title h2{
+    display: none;
   }
   nav{
+    font-size: 1em;
     background-color: #fff;
+    float: right;
   }
   nav>ul{
     padding: 0;
@@ -96,7 +109,8 @@ img.pull-right{
     padding: 5px;
   }
   .article h1{
-    background-color: #588C7E;
+    background-color: #99c4c1;
+    text-align: center;
   }
   #aboutMe h2{
     background-color: #588C7E;
@@ -110,7 +124,7 @@ img.pull-right{
     margin: auto;
     padding: 10px;
   }
-  .title{
+}
+@@media screen and (max-width:320px) {
 
-  }
 }
