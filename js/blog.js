@@ -156,14 +156,16 @@ $(function(){
   });
   //Event listener for About The Author
   $('#about').on('click', function(){
-    $('.about').show();
+    $('#aboutMe').show();
     $('.article').hide();
+    $('form').hide();
   });
 
   //Event listener for clicking Articles
   $('#arHome').on('click', function(){
-    $('.about').hide();
+    $('#aboutMe').hide();
     $('.article').show();
+    $('form').show();
   });
   /***End of ready function here***/
 });

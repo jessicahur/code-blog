@@ -60,23 +60,6 @@ img.pull-right{
   padding-left: 10px;
   clear: right;
 }
-@media screen and (max-width: 480px) {
-  nav>ul{
-    padding: 0;
-  }
-  nav li {
-    display: block;
-    padding: 5px;
-  }
-  img, img.pull-left, img.pull-right{
-    max-width: 200px;
-    max-height: 200px;
-    float: none;
-    display: block;
-    margin: auto;
-    padding: 10px;
-  }
-}
 /********************
 ****Day 2 Styling****
 ********************/
@@ -93,4 +76,41 @@ img.pull-right{
 }
 .hidden{
   display:none;
+}
+
+@media screen and (max-width: 480px) {
+  #title{
+    float:left;
+  }
+  #title h2, nav{
+    font-size: 1em;
+  }
+  nav{
+    background-color: #fff;
+  }
+  nav>ul{
+    padding: 0;
+  }
+  nav li {
+    display: block;
+    padding: 5px;
+  }
+  .article h1{
+    background-color: #588C7E;
+  }
+  #aboutMe h2{
+    background-color: #588C7E;
+    padding: 10px;
+  }
+  img, img.pull-left, img.pull-right{
+    max-width: 200px;
+    max-height: 200px;
+    float: none;
+    display: block;
+    margin: auto;
+    padding: 10px;
+  }
+  .title{
+
+  }
 }
