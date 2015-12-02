@@ -18,11 +18,16 @@ nav > ul{
 }
 nav li {
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 50px;
   font-size: 1.25em;
 }
 nav a {
   text-decoration: none;
+  color: inherit;
+}
+.article h1{
+  background-color: silver;
+  padding: 10px;
 }
 .author, .URL{
   display: inline;
@@ -31,7 +36,7 @@ nav a {
   display: none;
 }
 article{
-  border-bottom: solid 1px silver;
+  /*border-bottom: solid 1px silver;*/
   padding-bottom: 10px;
 }
 article::after{
@@ -71,4 +76,21 @@ img.pull-right{
     margin: auto;
     padding: 10px;
   }
+}
+/********************
+****Day 2 Styling****
+********************/
+.about{
+  display: none;
+}
+.readOn{
+  font-size: 1em;
+  opacity: 0.5;
+}
+.less{
+  font-size: 1em;
+  opacity: 0.5;
+}
+.hidden{
+  display:none;
 }
