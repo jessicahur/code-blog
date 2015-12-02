@@ -65,18 +65,18 @@ $(function(){
   //function Filter create filter lists for both author and category
   blog.filters = function(){
     //Filter out authors
-    var compareAuthor = function(a,b,prop){
+    var compareAuthor = function(a,b){
       if (a.author < b.author){return -1;};
       if (a.author > b.author){return 1;};
       return 0;
     };
     var tempArticlesArray = articlesArray.slice();
     tempArticlesArray.sort(compareAuthor);
-    var authors = Util.uniqueItem(tempArticlesArray,"author");
+    var authors = Util.uniqueItem(tempArticlesArray,'author');
     console.log(authors);
     var $authorSelect=$('.authorFilter');
     for (var ii=0; ii<authors.length;ii++){
-      $authorSelect.append("<option>"+authors[ii]+"</option>");
+      $authorSelect.append('<option>"+authors[ii]+"</option>');
     }
     //filter out category
     var compareCategory = function(a,b){
@@ -85,18 +85,15 @@ $(function(){
       return 0;
     };
     tempArticlesArray.sort(compareCategory);
-    var categories = Util.uniqueItem(tempArticlesArray,"category");
+    var categories = Util.uniqueItem(tempArticlesArray,'category');
     console.log(categories);
     var $categorySelect=$('.categoryFilter');
     for (var ii=0; ii<categories.length;ii++){
-      $categorySelect.append("<option>"+categories[ii]+"</option>");
+      $categorySelect.append('<option>"+categories[ii]+"</option>');
     }
   };
 
-  //function authorFilter grabbing articles of same author
-  blog.authorFilter = function(){
-  };
-
+  //Calling functions to make articles and insert them to DOM
   blog.makeArticle();
   blog.setTeaser();
   blog.filters();
@@ -113,7 +110,7 @@ $(function(){
 
   //Event listener for clicking on less...
   $('.less').on('click', function(){
-    console.log("1");
+    console.log('1');
     var $less = $(this);
     $less.hide();
     $less.prev().show();
@@ -126,19 +123,15 @@ $(function(){
     var author = $(this).val();
     var $article = $('.article');
     console.log(author);
-    if (author==="--Author--"){
-      $article.show();
-    }
-    else{
-      $article.hide();
-      var $authors = $('.author');
-      $authors.each(function(){
-        var text = $(this).text();
-        if(text===author){
-          $(this).parent().parent().parent().show();
-        }
-      });
-    }
+    $article.hide();
+    var $authors = $('.author');
+    $authors.each(function(){
+      var text = $(this).text();
+      if(text===author){
+        $(this).parent().parent().parent().show();
+      }
+    });
+
   });
 
   //Event listener for category selection
@@ -146,19 +139,15 @@ $(function(){
     var category = $(this).val();
     var $articles = $('.article');
     console.log(category);
-    if (category==='--Category--'){
-      $articles.show();
-    }
-    else{
-      $articles.hide();
-      var $categories = $('.category');
-      $categories.each(function(){
-        var text = $(this).text();
-        if(text===category){
-          $(this).parent().parent().parent().show();
-        }
-      });
-    }
+    $articles.hide();
+    var $categories = $('.category');
+    $categories.each(function(){
+      var text = $(this).text();
+      if(text===category){
+        $(this).parent().parent().parent().show();
+      }
+    });
+
   });
 
   //Event listener for clear filter button
@@ -175,6 +164,6 @@ $(function(){
   $('#arHome').on('click', function(){
     $('.about').hide();
     $('.article').show();
-  })
+  });
   /***End of ready function here***/
 });
