@@ -76,7 +76,7 @@ $(function(){
     console.log(authors);
     var $authorSelect=$('.authorFilter');
     for (var ii=0; ii<authors.length;ii++){
-      $authorSelect.append('<option>"+authors[ii]+"</option>');
+      $authorSelect.append('<option>'+authors[ii]+'</option>');
     }
     //filter out category
     var compareCategory = function(a,b){
@@ -89,7 +89,7 @@ $(function(){
     console.log(categories);
     var $categorySelect=$('.categoryFilter');
     for (var ii=0; ii<categories.length;ii++){
-      $categorySelect.append('<option>"+categories[ii]+"</option>');
+      $categorySelect.append('<option>'+categories[ii]+'</option>');
     }
   };
 
