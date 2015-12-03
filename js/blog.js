@@ -129,6 +129,7 @@ $(function(){
       var text = $(this).text();
       if(text===author){
         $(this).parent().parent().parent().show();
+        //$this.parent('.article').show();
       }
     });
 
@@ -151,7 +152,10 @@ $(function(){
   });
 
   //Event listener for clear filter button
-  $('button').on('click', function(){
+  $('button').on('click', function(e){
+    e.preventDefault();
+    $('#authorFilter').val('--Author--');
+    $('#categoryFilter').val('--Category--');
     $('.article').show();
   });
   //Event listener for About The Author
