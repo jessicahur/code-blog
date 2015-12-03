@@ -5,6 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
   <link href="css/styling.css" type="text/css" rel="stylesheet"/>
+  <script src="js/handlebars-v4.0.5.js"></script>
+  <script src="js/jquery-2.1.4.min.js"></script>
 </head>
 <body>
   <!--*************Blog Title**************-->
@@ -45,25 +47,27 @@
     </div>
     <!--**********Articles Section********** -->
     <section id="articles">
-      <article class="arTemplate">
-        <header>
-          <h1>Title</h1>
-          <div class="details">
-            <p><time pubdate datetime="2000-01-01">Publish Time</time></p>
-            <p class="author"></p>
-            <p class="URL"></p>
-            <p class="category"></p>
-          </div>
-        </header>
-        <section class="article-body">Body</section>
-      </article>
+      <!--HandleBars Template and article insertion-->
+      <script id="handlebars-template" type="text/x-handlebars-template">
+        <article class="article">
+          <header>
+            <h1>{{title}}</h1>
+            <div class="details">
+              <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
+              <p class="author"><b>{{author}}</b></p>
+              <p class="URL">{{authorUrl}}</p>
+              <p class="category">{{category}}</p>
+            </div>
+          </header>
+          <section class="article-body">{{{body}}}</section>
+        </article>
+      </script>
     </section>
     <!--**********Articles Section Ends Here********** -->
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/Util.js"></script>
     <script src="js/blogObj.js"></script>
     <script src="js/blogArticles.js"></script>
-    <script src="js/blog.js"></script>
+    <script src="js/Util.js"></script>
+    <script src="js/handlebarsScript.js"></script>
 
   </body>
 
