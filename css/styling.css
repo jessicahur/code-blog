@@ -38,6 +38,7 @@ article .article-body p, .readOn{
 .article h1{
   background-color: #99c4c1;
   padding: 10px;
+  text-align: center;
 }
 .author, .URL{
   display: inline;
@@ -117,10 +118,7 @@ img.pull-right{
     display: block;
     padding: 5px;
   }
-  .article h1{
-    background-color: #99c4c1;
-    text-align: center;
-  }
+
   img, img.pull-left, img.pull-right{
     max-width: 200px;
     max-height: 200px;
