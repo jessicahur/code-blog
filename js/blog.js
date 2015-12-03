@@ -74,7 +74,7 @@ $(function(){
     tempArticlesArray.sort(compareAuthor);
     var authors = Util.uniqueItem(tempArticlesArray,'author');
     console.log(authors);
-    var $authorSelect=$('.authorFilter');
+    var $authorSelect=$('#authorFilter');
     for (var ii=0; ii<authors.length;ii++){
       $authorSelect.append('<option>'+authors[ii]+'</option>');
     }
@@ -87,7 +87,7 @@ $(function(){
     tempArticlesArray.sort(compareCategory);
     var categories = Util.uniqueItem(tempArticlesArray,'category');
     console.log(categories);
-    var $categorySelect=$('.categoryFilter');
+    var $categorySelect=$('#categoryFilter');
     for (var ii=0; ii<categories.length;ii++){
       $categorySelect.append('<option>'+categories[ii]+'</option>');
     }
@@ -119,7 +119,7 @@ $(function(){
   });
 
   //Event listener for author selection
-  $('.authorFilter').on('change', function(){
+  $('#authorFilter').on('change', function(){
     var author = $(this).val();
     var $article = $('.article');
     console.log(author);
@@ -135,7 +135,7 @@ $(function(){
   });
 
   //Event listener for category selection
-  $('.categoryFilter').on('change',function(){
+  $('#categoryFilter').on('change',function(){
     var category = $(this).val();
     var $articles = $('.article');
     console.log(category);
