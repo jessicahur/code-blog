@@ -51,7 +51,7 @@ $(function(){
   //function setTeaser that hide all paragraphs after the
   //first one and add read on to the end of the article
   blog.setTeaser = function(){
-    var $articleBody=$('.article-body');
+    $articleBody=$('.article-body');
     var $articleHide=$articleBody.children(':not(:first-child)');
     $imgHide=$articleBody.find('img');
     $imgHide.hide();
@@ -104,6 +104,7 @@ $(function(){
   $('.readOn').on('click', function(){
     var $readOn = $(this);
     $readOn.hide();
+    $imgHide.show();
     $readOn.parent().children('.hidden').addClass('tempAvail');
     $('.tempAvail').fadeIn();
     $readOn.next().show();
@@ -115,6 +116,7 @@ $(function(){
     console.log('1');
     var $less = $(this);
     $less.hide();
+    $imgHide.hide();
     $less.prev().show();
     $less.parent().children('.hidden').removeClass('tempAvail');
     $('.hidden').css('display','none');
