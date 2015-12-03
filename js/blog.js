@@ -53,6 +53,8 @@ $(function(){
   blog.setTeaser = function(){
     var $articleBody=$('.article').children(':not(header)');
     var $articleHide=$articleBody.children(':not(:first-child)');
+    //var $imgHide=$articleBody.children('img');
+    //$imgHide.hide();
     $articleHide.addClass('hidden');
     $('.hidden').css('display','none');
     $articleBody.each(function(){
@@ -128,7 +130,7 @@ $(function(){
     $authors.each(function(){
       var text = $(this).text();
       if(text===author){
-        $(this).parent().parent().parent().show();
+        $(this).closest('.article').show();
         //$this.parent('.article').show();
       }
     });
@@ -145,7 +147,7 @@ $(function(){
     $categories.each(function(){
       var text = $(this).text();
       if(text===category){
-        $(this).parent().parent().parent().show();
+        $(this).closest('.article').show();
       }
     });
 
