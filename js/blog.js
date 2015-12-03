@@ -51,10 +51,10 @@ $(function(){
   //function setTeaser that hide all paragraphs after the
   //first one and add read on to the end of the article
   blog.setTeaser = function(){
-    var $articleBody=$('.article').children(':not(header)');
+    var $articleBody=$('.article-body');
     var $articleHide=$articleBody.children(':not(:first-child)');
-    //var $imgHide=$articleBody.children('img');
-    //$imgHide.hide();
+    $imgHide=$articleBody.find('img');
+    $imgHide.hide();
     $articleHide.addClass('hidden');
     $('.hidden').css('display','none');
     $articleBody.each(function(){
