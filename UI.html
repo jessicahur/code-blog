@@ -7,6 +7,7 @@
   <link href="css/UI.css" type="text/css" rel="stylesheet"/>
   <script src="js/handlebars-v4.0.5.js"></script>
   <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="marked.min.js"></script>
 </head>
 <body>
   <!--User Form Inputs-->
@@ -17,8 +18,14 @@
     <p>URL:
       <input id="authorUrl" type="text" name="URL"/>
     </p>
-    <p>Entry Title:
+    <p>Title:
+      <input id="title"/>
+    </p>
+    <p>Article Body:
       <textarea id="articleBody" class="articleEntry" row="15" cols="15"></textarea>
+    </p>
+    <p>Category:
+      <input id="category"/>
     </p>
   </form>
 
