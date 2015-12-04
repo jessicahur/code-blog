@@ -33,6 +33,9 @@ Util.compareCategory = function(a,b){
 
 //Function to set height of l-header proportion to width
 Util.setHeightLHeader = function(){
-  var cw = $('.l-header').width()*2/3;
-  $('.l-header').css('height',cw+'px');
+  var width = $(window).width();
+  if(width<=480){
+    var cw = $('.l-header').width()*2/3;
+    $('.l-header').css('height',cw+'px');
+  }
 };

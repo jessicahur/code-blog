@@ -13,7 +13,6 @@
     top:0;
     opacity: 0.5;
     background-color: #fff;
-    z-index: 9999;
   }
   /*Module rules*/
   #list-navigation, .l-navigation {
@@ -67,5 +66,21 @@
   }
   .article{
     border-bottom: solid 2px #f6c8c1;
+  }
+}
+@media screen and (min-width: 490px){
+  /*Base rules*/
+  body{
+    margin: 0;
+    text-align: center;
+  }
+  /*Layout rules*/
+  .l-navigation{
+    background-color: red;
+  }
+
+  /*Theme rules */
+  #menuIcon{
+    display: none;
   }
 }
