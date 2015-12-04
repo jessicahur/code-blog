@@ -7,7 +7,7 @@
   <link href="css/UI.css" type="text/css" rel="stylesheet"/>
   <script src="js/handlebars-v4.0.5.js"></script>
   <script src="js/jquery-2.1.4.min.js"></script>
-  <script src="marked.min.js"></script>
+  <script src="js/marked.min.js"></script>
 </head>
 <body>
   <!--User Form Inputs-->
@@ -28,6 +28,21 @@
       <input id="category"/>
     </p>
   </form>
+
+  <div>
+    <article class="article">
+      <header>
+        <h1 class="article-header" id="insert-title"></h1>
+        <div class="details">
+          <p>Published on: <time id="insert-time" pubdate datetime="2000-01-01"></time></p>
+          <p class="author" id="insert-author"><b></b></p>
+          <p class="URL" id="insert-url"></p>
+          <p class="category" id="insert-category"><i>Category: <span></span></i></p>
+        </div>
+      </header>
+      <section class="article-body" id="insert-article"></section>
+    </article>
+  </div>
 
   <!--Article Preview-->
   <script id="UserPreview" type="text/x-handlebars-template">
