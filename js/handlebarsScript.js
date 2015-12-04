@@ -52,7 +52,6 @@ $(function(){
   };
   blog.setTeaser();
   blog.setFilters();
-  Util.setHeightLHeader();
   //Event listener for clicking on Read On
   $('.readOn').on('click', function(){
     var $readOn = $(this);

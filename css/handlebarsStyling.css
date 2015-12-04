@@ -53,6 +53,9 @@
     display: flex;
     background-color: #f6c8c1;
   }
+  .form form{
+    width: 100%;
+  }
   .l-articles{
     display: flex;
     background-color: #fbe0d3;
@@ -68,18 +71,25 @@
     border-bottom: solid 2px #f6c8c1;
   }
 }
-@media screen and (min-width: 490px){
+@media screen and (min-width: 481px){
   /*Base rules*/
   body{
     margin: 0;
     text-align: center;
   }
   /*Layout rules*/
-  .l-navigation{
-    background-color: red;
-  }
 
   /*Theme rules */
+  #list-navigation{
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+  }
+  #list-navigation li{
+    display: inline-block;
+    padding: 2em;
+  }
   #menuIcon{
     display: none;
   }
