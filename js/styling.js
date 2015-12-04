@@ -5,7 +5,7 @@ $(function(){
   var $layoutNavigation = $('.l-navigation');
   var $listNavigation = $('#list-navigation');
   console.log('window width is '+width);
-  if(width<=480){
+  if(width<=550){
     var cw = $('.l-header').width()*2/3;
     $lHeader.css('height',cw+'px');
     $menu.hide();
@@ -16,7 +16,8 @@ $(function(){
   });
   $(window).on('resize',function(){
     width = $(window).width();
-    if(width<=480){
+    if(width<=550){
+      $lHeader.find('h1').css('display','flex');
       $listNavigation.children().css('display','block');
       console.log('menuIcon siblings are '+$menu);
       var cw = $lHeader.width()*2/3;
@@ -25,7 +26,8 @@ $(function(){
       //Event listener to animate menu bar
     }
     else{
-      $lHeader.css('height','auto');
+      $lHeader.css('height','100');
+      $lHeader.find('h1').css('display','block');
       $listNavigation.css('height','auto');
       $listNavigation.children().css({
         'display':'inline-block',
