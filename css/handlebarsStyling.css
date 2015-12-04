@@ -81,14 +81,15 @@
 
   /*Theme rules */
   #list-navigation{
+
     width: 100%;
     padding: 0;
     list-style-type: none;
-    display: inline-block;
   }
   #list-navigation li{
     display: inline-block;
-    padding: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
   }
   #menuIcon{
     display: none;
