@@ -98,7 +98,8 @@ $(function(){
     var $articles = $('.article');
     console.log(category);
     $articles.hide();
-    var $categories = $('.category');
+    var $categories = $('.category').find('span');
+    console.log($categories);
     $categories.each(function(){
       var text = $(this).text();
       if(text===category){
