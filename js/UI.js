@@ -29,18 +29,19 @@ $(function(){
     var $titleInsert = $('#insert-title');
     var $articleBodyInsert = $('#insert-article');
     var $categoryInsert = $('#insert-category');
-
+    var $pJson = $('#json-output');
     var userInputVal = render()[1];
     console.log(render()[0]);
 
-    var jsonStr = pJson.text(JSON.stringify(myObj));
-    
+    var jsonStr = $pJson.text(JSON.stringify(myObj));
+
     $articleBodyInsert.children().remove();
     $authorInsert.text(userInputVal[0]);
     $authorUrlInsert.text(userInputVal[1]);
     $titleInsert.text(userInputVal[2]);
     $articleBodyInsert.append($(userInputVal[3]));
     $categoryInsert.text(userInputVal[4]);
+
   }
 
 
