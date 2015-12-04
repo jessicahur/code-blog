@@ -30,3 +30,9 @@ Util.compareCategory = function(a,b){
   if (a.category > b.category){return 1;};
   return 0;
 };
+
+//Function to set height of l-header proportion to width
+Util.setHeightLHeader = function(){
+  var cw = $('.l-header').width()*2/3;
+  $('.l-header').css('height',cw+'px');
+};

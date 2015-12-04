@@ -1,4 +1,5 @@
 $(function(){
+
   var articlesArray = blog.rawData.slice();
   articlesArray.sort(Util.compareTimeStamps);
   console.log(articlesArray);
@@ -9,11 +10,11 @@ $(function(){
   var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
   //Inserting content into compiledScriptTemplate
   var $articlesSection = $('#articles');
+  var $thisArticle;
   for (var ii=0; ii<articlesArray.length; ii++){
-    var $htmlOutput = $(compiledScriptTemplate(articlesArray[ii])); //passing data into htmlOutput
+    var $htmlOutput = $(compiledScriptTemplate(articlesArray[ii])); //passing data into htmlOutput and make it a jQuery obj
+    $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(articlesArray[ii].publishedOn))/60/60/24/1000) + ' days ago)');
     $articlesSection.append($htmlOutput);
-    var $thisArticle = $('#articles').children(':nth-child(2)');
-    $thisArticle.find('time').text(' ('+parseInt((new Date() - new Date(articlesArray[ii].publishedOn))/60/60/24/1000) + ' days ago)');
   }
 
   blog.setTeaser = function(){
@@ -51,7 +52,7 @@ $(function(){
   };
   blog.setTeaser();
   blog.setFilters();
-
+  Util.setHeightLHeader();
   //Event listener for clicking on Read On
   $('.readOn').on('click', function(){
     var $readOn = $(this);
