@@ -9,6 +9,7 @@
   <script src="js/jquery-2.1.4.min.js"></script>
 </head>
 <body>
+  <!--User Form Inputs-->
   <form id="userInput">
     <p>Author name:
       <input id="author" type="text" name="author" maxlength="30"/>
@@ -20,5 +21,21 @@
       <textarea id="articleBody" class="articleEntry" row="15" cols="15"></textarea>
     </p>
   </form>
+
+  <!--Article Preview-->
+  <script id="UserPreview" type="text/x-handlebars-template">
+    <article class="article">
+      <header>
+        <h1 class="article-header">{{title}}</h1>
+        <div class="details">
+          <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
+          <p class="author"><b>{{author}}</b></p>
+          <p class="URL">{{authorUrl}}</p>
+          <p class="category"><i>Category: <span>{{category}}</span></i></p>
+        </div>
+      </header>
+      <section class="article-body">{{{body}}}</section>
+    </article>
+  </script>
 </body>
 </html>
