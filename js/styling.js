@@ -25,7 +25,7 @@ $(function(){
       //Event listener to animate menu bar
     }
     else{
-      $lHeader.css('height','50');
+      $lHeader.css('height','auto');
       $listNavigation.css('height','auto');
       $listNavigation.children().css({
         'display':'inline-block',

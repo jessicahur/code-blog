@@ -78,7 +78,14 @@
     text-align: center;
   }
   /*Layout rules*/
-
+  .l-header{
+    display: flex;
+    background-image: url();
+  }
+  #blogTitle{
+    width: 100%;
+    text-align: center;
+  }
   /*Theme rules */
   #list-navigation{
 
