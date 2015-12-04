@@ -56,6 +56,10 @@
   .form form{
     width: 100%;
   }
+  #aboutMe{
+    background-color: #fbe0d3;
+
+  }
   .l-articles{
     display: flex;
     background-color: #fbe0d3;
@@ -107,8 +111,8 @@
   }
   #list-navigation li{
     display: inline-block;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 2em;
+    padding-right: 2em;
   }
   #menuIcon{
     display: none;
