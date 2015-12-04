@@ -4,6 +4,7 @@ $(function(){
   var $title = $('#title');
   var $articleBody = $('#articleBody');
   var $category = $('#category');
+  var myObj = {};
 
   function render(){
     var userInput = [$author, $authorUrl, $title, $articleBody, $category];
@@ -13,7 +14,12 @@ $(function(){
     }
     var bodyM = marked(userInputVal[3]);
     userInputVal[3] = bodyM;
-    return userInputVal;
+    myObj.author = userInputVal[0];
+    myObj.authorUrl = userInputVal[1];
+    myObj.title = userInputVal[2];
+    myObj.articleBody = userInputVal[3];
+    myObj.category = userInputVal[4];
+    return [myObj, userInputVal];
   }
 
   function insert(){
@@ -24,8 +30,11 @@ $(function(){
     var $articleBodyInsert = $('#insert-article');
     var $categoryInsert = $('#insert-category');
 
-    var userInputVal = render();
-    console.log(userInputVal);
+    var userInputVal = render()[1];
+    console.log(render()[0]);
+
+    var jsonStr = pJson.text(JSON.stringify(myObj));
+    
     $articleBodyInsert.children().remove();
     $authorInsert.text(userInputVal[0]);
     $authorUrlInsert.text(userInputVal[1]);
