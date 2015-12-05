@@ -4,8 +4,8 @@ $(function(){
   var $title = $('#title');
   var $articleBody = $('#articleBody');
   var $category = $('#category');
-  var $submitButton = $('#entry-submit');
-  var $timeInsert = $('#insert-time');
+  var $submitButton = $('#entrySubmit');
+  var $timeInsert = $('#insertTime');
   var myObj = {publishedOn: ''};
 
   function render(){
@@ -26,13 +26,13 @@ $(function(){
 
   function insert(){
     console.log('1');
-    var $authorInsert = $('#insert-author');
-    var $authorUrlInsert = $('#insert-url');
-    var $titleInsert = $('#insert-title');
-    var $articleBodyInsert = $('#insert-article');
-    var $categoryInsert = $('#insert-category');
+    var $authorInsert = $('#insertAuthor');
+    var $authorUrlInsert = $('#insertUrl');
+    var $titleInsert = $('#insertTitle');
+    var $articleBodyInsert = $('#insertArticle');
+    var $categoryInsert = $('#insertCategory');
 
-    var $pJson = $('#json-output');
+    var $pJson = $('#jsonOutput');
     var userInputVal = render()[1];
     console.log(render()[0]);
 
@@ -48,7 +48,7 @@ $(function(){
 
   function getDate(){
     var dString = new Date();
-    var date = JSON.stringify(dString).slice(0,11);
+    var date = JSON.stringify(dString).slice(1,11);
     return date;
   }
 
@@ -66,7 +66,7 @@ $(function(){
   $submitButton.on('click', function(e){
     e.preventDefault();
     var date = getDate();
-    date = date.replace('"', '');
+    // date = date.replace('"', '');
     myObj.publishedOn = date;
     $timeInsert.text(date);
     insert();
