@@ -5,31 +5,27 @@ $(function(){
   var $articleBody = $('#articleBody');
   var $category = $('#category');
   var $submitButton = $('#entrySubmit');
+  var date = getDate();
   // var $timeInsert = $('#insertTime');
 
   function render(){
     var userInput = {
-                      author:   $author,
-                     authorUrl: $authorUrl,
-                     title:     $title,
-                     body:      $articleBody,
-                     category:  $category
+                      title:     $title,
+                      category:  $category,
+                      author:    $author,
+                      authorUrl: $authorUrl,
+                      body:      $articleBody
                    };
-    var userInputVal = [];
+    var userInputVal = {};
     var date = getDate();
-    var myObj = {publishedOn: date};
 
     for(item in userInput){
-      userInputVal.push(userInput[item]);
+      userInputVal[item] = userInput[item].val();
     }
-    var bodyM = marked(userInputVal[3]);
-    userInputVal[3] = bodyM;
-    myObj.author = userInputVal[0];
-    myObj.authorUrl = userInputVal[1];
-    myObj.title = userInputVal[2];
-    myObj.articleBody = userInputVal[3];
-    myObj.category = userInputVal[4];
-    return [myObj, userInputVal];
+
+    userInputVal.body = marked(userInputVal.body);
+    userInputVal.publishedOn = date;
+    return [userInputVal, userInputVal];
   }
 
   function insert(){
@@ -69,10 +65,8 @@ $(function(){
   //Event listener for submit button in order to finalize the publish date
   $submitButton.on('click', function(e){
     e.preventDefault();
-    // // var date = getDate();
-    // // myObj.publishedOn = date;
-    // $timeInsert.text(date);
-    // insert();
+    var date = getDate();
+    myObj.publishedOn = date;
   });
 
   insert();
