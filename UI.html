@@ -13,41 +13,41 @@
   <!--User Form Inputs-->
   <form id="userInput">
     <p>Author name:
-      <input id="author" type="text" name="author" maxlength="30"/>
+      <input id="author" value="Jessica Hur" type="text" name="author" maxlength="30"/>
     </p>
     <p>URL:
-      <input id="authorUrl" type="text" name="URL"/>
+      <input id="authorUrl" value="jessica.github.io" type="text" name="URL"/>
     </p>
     <p>Title:
-      <input id="title"/>
+      <input id="title" value="The life we live"/>
     </p>
     <p>Article Body:
       <textarea id="articleBody" class="articleEntry" row="15" cols="15"></textarea>
     </p>
     <p>Category:
-      <input id="category"/>
+      <input id="category" value="lifestyle"/>
     </p>
 
-    <button type="button" name="button" id="entry-submit">Submit</button>
+    <button type="button" name="button" id="entrySubmit">Submit</button>
   </form>
 
   <div>
     <article class="article">
       <header>
-        <h1 class="article-header" id="insert-title"></h1>
+        <h1 class="articleHeader" id="insertTitle"></h1>
         <div class="details">
-          <p>Published on: <time id="insert-time" pubdate datetime="2000-01-01"></time></p>
-          <p class="author" id="insert-author"><b></b></p>
-          <p class="URL" id="insert-url"></p>
-          <p class="category" id="insert-category"><i>Category: <span></span></i></p>
+          <p>Published on: <time id="insertTime" pubdate datetime="2000-01-01"></time></p>
+          <p class="author" id="insertAuthor"><b></b></p>
+          <p class="URL" id="insertUrl"></p>
+          <p class="category" id="insertCategory"><i>Category: <span></span></i></p>
         </div>
       </header>
-      <section class="article-body" id="insert-article"></section>
+      <section class="articleBody" id="insertArticle"></section>
     </article>
   </div>
 
   <div class="">
-      <p id="json-output">
+      <p id="jsonOutput">
 
       </p>
   </div>
