@@ -5,7 +5,7 @@ $(function(){
   console.log(articlesArray);
 
   //Grab template in html file
-  var rawScriptTemplate = $('#handlebars-template').html();
+  var rawScriptTemplate = $('#handlebarsTemplate').html();
   //Complile the rawScriptTemplate
   var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
   //Inserting content into compiledScriptTemplate
@@ -18,7 +18,7 @@ $(function(){
   }
 
   blog.setTeaser = function(){
-    $articleBody=$('.article-body');
+    $articleBody=$('.articleBody');
     var $articleHide=$articleBody.children(':not(:first-child)');
     $imgHide=$articleBody.find('img');
     $imgHide.hide();

@@ -3,7 +3,7 @@ $(function(){
   var $menu = $('#menuIcon').parent().siblings();
   var $lHeader = $('.l-header');
   var $layoutNavigation = $('.l-navigation');
-  var $listNavigation = $('#list-navigation');
+  var $listNavigation = $('#listNavigation');
   console.log('window width is '+width);
   if(width<=550){
     var cw = $('.l-header').width()*2/3;
