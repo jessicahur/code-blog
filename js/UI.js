@@ -1,4 +1,6 @@
+var UI = UI || {};
 $(function(){
+  var myObj;
   var $author = $('#author');
   var $authorUrl = $('#authorUrl');
   var $title = $('#title');
@@ -8,7 +10,7 @@ $(function(){
   var date = getDate();
   // var $timeInsert = $('#insertTime');
 
-  function render(){
+  UI.render = function render(){
     var userInput = {
                       title:     $title,
                       category:  $category,
@@ -25,18 +27,16 @@ $(function(){
 
     userInputVal.body = marked(userInputVal.body);
     userInputVal.publishedOn = date;
-    return [userInputVal, userInputVal];
+    return userInputVal;
   }
 
-  function insert(){
+  UI.insert = function insert(){
+    myObj = UI.render();
     var $pJson = $('#jsonOutput');
-    var renderOutput = render();
-    var userInputVal = renderOutput[1];
-    var myObj = renderOutput[0];
     var date = getDate();
     myObj.publishedOn = date;
-    console.log(myObj);
-    var jsonStr = $pJson.text(JSON.stringify(myObj).replace(/\\"/g, '"'));
+    console.log(JSON.stringify(myObj));
+    $pJson.text(JSON.stringify(myObj));
 
     //handlebars here
     var $articleOutput = $('#articles');
@@ -48,6 +48,7 @@ $(function(){
     $articleOutput.append($htmlOutput);
   }
 
+  //Function to get current date while typing or decide to finalize article
   function getDate(){
     var dString = new Date();
     var date = JSON.stringify(dString).slice(1,11);
@@ -56,11 +57,11 @@ $(function(){
 
   //Event listeners for changes
   console.log($author);
-  $author.on('input', insert);
-  $authorUrl.on('input', insert);
-  $title.on('input', insert);
-  $articleBody.on('input', insert);
-  $category.on('input', insert);
+  $author.on('input', UI.insert);
+  $authorUrl.on('input', UI.insert);
+  $title.on('input', UI.insert);
+  $articleBody.on('input', UI.insert);
+  $category.on('input', UI.insert);
 
   //Event listener for submit button in order to finalize the publish date
   $submitButton.on('click', function(e){
@@ -69,5 +70,5 @@ $(function(){
     myObj.publishedOn = date;
   });
 
-  insert();
+  UI.insert();
 });
