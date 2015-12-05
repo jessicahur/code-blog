@@ -4,6 +4,7 @@ $(function(){
   var $title = $('#title');
   var $articleBody = $('#articleBody');
   var $category = $('#category');
+  var $submitButton = $('#entry-submit');
   var myObj = {};
 
   function render(){
@@ -33,7 +34,7 @@ $(function(){
     var userInputVal = render()[1];
     console.log(render()[0]);
 
-    var jsonStr = $pJson.text(JSON.stringify(myObj));
+    var jsonStr = $pJson.text(JSON.stringify(myObj).replace(/\\"/g, '"'));
 
     $articleBodyInsert.children().remove();
     $authorInsert.text(userInputVal[0]);
@@ -41,7 +42,12 @@ $(function(){
     $titleInsert.text(userInputVal[2]);
     $articleBodyInsert.append($(userInputVal[3]));
     $categoryInsert.text(userInputVal[4]);
+  }
 
+  function getDate(){
+    var dString = new Date();
+    var date = JSON.stringify(dString).slice(0,11);
+    return date;
   }
 
 
@@ -53,5 +59,11 @@ $(function(){
   $title.on('input', insert);
   $articleBody.on('input', insert);
   $category.on('input', insert);
+  $submitButton.on('click', function(e){
+    e.preventDefault();
+    var date = getDate();
+    myObj.publishedOn = date;
+    insert();
+  });
   insert();
 });
