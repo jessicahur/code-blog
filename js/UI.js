@@ -8,13 +8,19 @@ $(function(){
   // var $timeInsert = $('#insertTime');
 
   function render(){
-    var userInput = [$author, $authorUrl, $title, $articleBody, $category];
+    var userInput = {
+                      author:   $author,
+                     authorUrl: $authorUrl,
+                     title:     $title,
+                     body:      $articleBody,
+                     category:  $category
+                   };
     var userInputVal = [];
     var date = getDate();
     var myObj = {publishedOn: date};
 
-    for(var ii=0; ii<userInput.length; ii++){
-      userInputVal.push(userInput[ii].val());
+    for(item in userInput){
+      userInputVal.push(userInput[item]);
     }
     var bodyM = marked(userInputVal[3]);
     userInputVal[3] = bodyM;
