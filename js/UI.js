@@ -36,7 +36,8 @@ $(function(){
     var date = getDate();
     myObj.publishedOn = date;
     console.log(JSON.stringify(myObj));
-    $pJson.text(JSON.stringify(myObj));
+    //console.log(JSON.stringify(myObj).replace(/\"/g, '\''));
+    $pJson.text(JSON.stringify(myObj).replace(/\"/g, '\''));
 
     //handlebars here
     var $articleOutput = $('#articles');
