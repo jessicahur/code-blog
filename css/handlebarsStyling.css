@@ -18,7 +18,7 @@
     background-color: #fff;
   }
   /*Module rules*/
-  #list-navigation, .l-navigation {
+  #listNavigation, .l-navigation {
     list-style-type: none;
     width: 100%;
     padding: 0;
@@ -46,7 +46,7 @@
     background-size: 100% 100%;
     top:0;
   }
-  #list-navigation{
+  #listNavigation{
     opacity: 0.95;
   }
   .form{
@@ -64,7 +64,7 @@
     display: flex;
     background-color: #fbe0d3;
   }
-  .article-body{
+  .articleBody{
     text-align: left;
     padding-left: 10px;
   }
@@ -102,14 +102,14 @@
     text-align: center;
   }
   /*Theme rules */
-  #list-navigation{
+  #listNavigation{
     background-color: #f6c8c1;
     padding: 16px;
     margin: 0;
     width: 100%;
     list-style-type: none;
   }
-  #list-navigation li{
+  #listNavigation li{
     display: inline-block;
     padding-left: 2em;
     padding-right: 2em;
@@ -132,7 +132,7 @@
     display: flex;
     background-color: #fbe0d3;
   }
-  .article-body{
+  .articleBody{
     text-align: left;
     padding-left: 10px;
   }
@@ -146,13 +146,13 @@
     max-width:300px;
     max-height:200px;
   }
-  img.pull-left{
+  .pull-left{
     float: left;
     padding-top: 10px;
     padding-right: 10px;
     clear:left;
   }
-  img.pull-right{
+  .pull-right{
     float: right;
     padding-top: 10px;
     padding-left: 10px;
