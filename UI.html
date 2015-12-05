@@ -28,30 +28,33 @@
       <input id="category" value="lifestyle"/>
     </p>
 
-    <button type="button" name="button" id="entrySubmit">Submit</button>
+    <button type="button" name="button" id="entrySubmit">Finalize my entry!</button>
   </form>
 
   <div>
-    <article class="article">
-      <header>
-        <h1 class="articleHeader" id="insertTitle"></h1>
-        <div class="details">
-          <p>Published on: <time id="insertTime" pubdate datetime="2000-01-01"></time></p>
-          <p class="author" id="insertAuthor"><b></b></p>
-          <p class="URL" id="insertUrl"></p>
-          <p class="category" id="insertCategory"><i>Category: <span></span></i></p>
-        </div>
-      </header>
-      <section class="articleBody" id="insertArticle"></section>
-    </article>
-  </div>
-
-  <div class="">
       <p id="jsonOutput">
-
       </p>
   </div>
 
+  <div class="l-articles">
+    <section id="articles">
+  <!--Article Preview-->
+    <script id="UserPreview" type="text/x-handlebars-template">
+      <article class="article">
+        <header>
+          <h1 class="articleHeader">{{title}}</h1>
+          <div class="details">
+            <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
+            <p class="author"><b>{{author}}</b></p>
+            <p class="URL">{{authorUrl}}</p>
+            <p class="category"><i>Category: <span>{{category}}</span></i></p>
+          </div>
+        </header>
+        <section class="articleBody">{{{articleBody}}}</section>
+      </article>
+    </script>
+  </section>
+</div>
   <script src="js/UI.js"></script>
 </body>
 </html>
