@@ -8,8 +8,8 @@
     display: none;
   }
   /*Layout rules*/
-  .l-header{
-    display:flex;
+  .flexbox{
+    display: flex;
   }
   .l-navigation{
     position: fixed;
@@ -31,14 +31,10 @@
     height:1.5em;
   }
   #blogTitle{
-    display: flex;
     opacity: 0.5;
     width:100%;
     align-items:center;
     justify-content:center;
-  }
-  #articles img{
-    width: 100%;
   }
   /*Theme rules*/
   .l-header{
@@ -50,11 +46,11 @@
     opacity: 0.95;
   }
   .form{
-    display: flex;
     background-color: #f6c8c1;
   }
   .form form{
     width: 100%;
+    padding-bottom: 1em;
   }
   #aboutMe{
     background-color: #fbe0d3;
@@ -71,10 +67,17 @@
   .readOn{
     opacity: 0.5;
   }
+  .less{
+    opacity: 0.5;
+  }
+  .center{
+    width: 100%;
+    margin:auto;
+  }
   .article{
     border-bottom: solid 2px #f6c8c1;
   }
-  img, img.pull-left, img.pull-right{
+  img{
     max-width: 200px;
     max-height: 200px;
     display: block;
@@ -97,19 +100,19 @@
     background-image: url('../img/flowerBackground.jpg');
     height: 100px;
   }
-  #blogTitle{
+  .title{
     width: 100%;
     text-align: center;
   }
   /*Theme rules */
-  #listNavigation{
+  .dropList{
     background-color: #f6c8c1;
     padding: 16px;
     margin: 0;
     width: 100%;
     list-style-type: none;
   }
-  #listNavigation li{
+  .dropList li{
     display: inline-block;
     padding-left: 2em;
     padding-right: 2em;
@@ -138,6 +141,10 @@
   }
   .readOn{
     opacity: 0.5;
+  }
+  .center{
+    width: 100%;
+    margin:auto;
   }
   .article{
     border-bottom: solid 2px #f6c8c1;

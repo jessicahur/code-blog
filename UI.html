@@ -37,12 +37,12 @@
   </div>
 
   <div class="l-articles">
-    <section id="articles">
+    <section id="articles" class="center">
   <!--Article Preview-->
     <script id="UserPreview" type="text/x-handlebars-template">
       <article class="article">
         <header>
-          <h1 class="articleHeader">{{title}}</h1>
+          <h1 class="articleHeader title">{{title}}</h1>
           <div class="details">
             <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
             <p class="author"><b>{{author}}</b></p>
@@ -55,6 +55,9 @@
     </script>
   </section>
 </div>
+  <script src="js/Util.js"></script>
+  <script src="js/blogObj.js"></script>
+  <script src="js/blogArticles.js"></script>
   <script src="js/UI.js"></script>
 </body>
 </html>

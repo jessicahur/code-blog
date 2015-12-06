@@ -1,12 +1,13 @@
 var UI = UI || {};
 $(function(){
-  var myObj;
+  var myObj = {};
   var $author = $('#author');
   var $authorUrl = $('#authorUrl');
   var $title = $('#title');
   var $articleBody = $('#articleBody');
   var $category = $('#category');
   var $submitButton = $('#entrySubmit');
+  var $pJson = $('#jsonOutput');
   var date = getDate();
   // var $timeInsert = $('#insertTime');
 
@@ -32,11 +33,11 @@ $(function(){
 
   UI.insert = function insert(){
     myObj = UI.render();
-    var $pJson = $('#jsonOutput');
     var date = getDate();
     myObj.publishedOn = date;
+
     console.log(JSON.stringify(myObj));
-    $pJson.text(JSON.stringify(myObj).replace(/\"/g, '\''));//replace double " with single '
+    $pJson.text(JSON.stringify(myObj));
 
     //handlebars here
     var $articleOutput = $('#articles');
@@ -46,6 +47,8 @@ $(function(){
     $articleOutput.children(':not(:first-child)').remove();
     $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(myObj.publishedOn))/60/60/24/1000) + ' days ago)');
     $articleOutput.append($htmlOutput);
+    console.log(myObj);
+
   }
 
   //Function to get current date while typing or decide to finalize article
@@ -66,9 +69,13 @@ $(function(){
   //Event listener for submit button in order to finalize the publish date
   $submitButton.on('click', function(e){
     e.preventDefault();
-    var date = getDate();
-    myObj.publishedOn = date;
+    UI.insert();
+    Util.setTeaser();
+    blog.rawData.unshift(myObj);
+    console.log(blog.rawData);
   });
 
   UI.insert();
+
+
 });

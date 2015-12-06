@@ -10,12 +10,12 @@
 </head>
 <body>
   <!--*************Blog Title**************-->
-  <div class="l-header">
-    <h1 id="blogTitle">The Random Blog</h1>
+  <div class="l-header flexbox">
+    <h1 id="blogTitle" class="flexbox title">The Random Blog</h1>
   </div>
   <!--**********Navigation Bar***********-->
   <div class = "l-navigation">
-    <ul id="listNavigation">
+    <ul id="listNavigation" class="dropList">
       <li id="arHome"><img src="img/article.png" width="16px"/><span>Articles</span></li>
       <li id="about"><img src="img/about.png" width="16px"/><span class="navigation">About</span></li>
       <li><a><img src="img/twitterLogo.png" width="16px"/><span class="navigation">Twitter</span></a></li>
@@ -24,7 +24,7 @@
     </ul>
   </div>
   <!--*********Filters**********-->
-  <div class = "form">
+  <div class = "form flexbox">
     <form >
       <p><b>Filter by author or category here</b></p>
       <select id="authorFilter">
@@ -47,12 +47,12 @@
     </div>
     <!--**********Articles Section********** -->
     <div class="l-articles">
-      <section id="articles">
+      <section id="articles" class="center" >
         <!--HandleBars Template and article insertion-->
         <script id="handlebarsTemplate" type="text/x-handlebars-template">
           <article class="article">
             <header>
-              <h1 class="articleHeader">{{title}}</h1>
+              <h1 class="articleHeader title">{{title}}</h1>
               <div class="details">
                 <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
                 <p class="author"><b>{{author}}</b></p>
