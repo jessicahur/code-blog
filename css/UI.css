@@ -1,0 +1,19 @@
+@media screen and (max-width: 550px){
+  /* Base rules*/
+  body{
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+  /*Layout rules*/
+
+  /*Module rules*/
+  .articleEntry{
+    display: block;
+    width: 90%;
+    margin: auto;
+    overflow: scroll;
+  }
+  /*Theme rules*/
+
+}

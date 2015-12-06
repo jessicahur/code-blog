@@ -7,7 +7,57 @@
   <link href="css/handlebarsStyling.css" type="text/css" rel="stylesheet"/>
   <script src="js/handlebars-v4.0.5.js"></script>
   <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/marked.min.js"></script>
 </head>
 <body>
+  <!--User Form Inputs-->
+  <form id="userInput">
+    <p>Author name:
+      <input id="author" value="Jessica Hur" type="text" name="author" maxlength="30"/>
+    </p>
+    <p>URL:
+      <input id="authorUrl" value="jessica.github.io" type="text" name="URL"/>
+    </p>
+    <p>Title:
+      <input id="title" value="The life we live"/>
+    </p>
+    <p>Article Body:
+      <textarea id="articleBody" class="articleEntry" row="15" cols="15"></textarea>
+    </p>
+    <p>Category:
+      <input id="category" value="lifestyle"/>
+    </p>
+
+    <button type="button" name="button" id="entrySubmit">Finalize my entry!</button>
+  </form>
+  <!--Output of Json stringify-->
+  <div class="flexbox box">
+      <p id="jsonOutput">
+      </p>
+  </div>
+
+  <div class="l-articles">
+    <section id="articles" class="center">
+  <!--Article Preview-->
+    <script id="UserPreview" type="text/x-handlebars-template">
+      <article class="article">
+        <header>
+          <h1 class="articleHeader title">{{title}}</h1>
+          <div class="details">
+            <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
+            <p class="author"><b>{{author}}</b></p>
+            <p class="URL">{{authorUrl}}</p>
+            <p class="category"><i>Category: <span>{{category}}</span></i></p>
+          </div>
+        </header>
+        <section class="articleBody">{{{body}}}</section>
+      </article>
+    </script>
+  </section>
+</div>
+  <script src="js/Util.js"></script>
+  <script src="js/blogObj.js"></script>
+  <script src="js/blogArticles.js"></script>
+  <script src="js/UI.js"></script>
 </body>
 </html>

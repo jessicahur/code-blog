@@ -5,12 +5,11 @@ $(function(){
   console.log(articlesArray);
 
   //Grab template in html file
-  var rawScriptTemplate = $('#handlebars-template').html();
+  var rawScriptTemplate = $('#handlebarsTemplate').html();
   //Complile the rawScriptTemplate
   var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
   //Inserting content into compiledScriptTemplate
   var $articlesSection = $('#articles');
-  var $thisArticle;
   for (var ii=0; ii<articlesArray.length; ii++){
     var $htmlOutput = $(compiledScriptTemplate(articlesArray[ii])); //passing data into htmlOutput and make it a jQuery obj
     $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(articlesArray[ii].publishedOn))/60/60/24/1000) + ' days ago)');
@@ -18,15 +17,15 @@ $(function(){
   }
 
   blog.setTeaser = function(){
-    $articleBody=$('.article-body');
+    $articleBody=$('.articleBody');
     var $articleHide=$articleBody.children(':not(:first-child)');
     $imgHide=$articleBody.find('img');
     $imgHide.hide();
     $articleHide.addClass('hidden');
     $('.hidden').css('display','none');
     $articleBody.each(function(){
-      $(this).append('<a class="readOn">read on...</a>');
-      $(this).append('<a class="less">less...</a>');
+      $(this).append('<a class="readOn halfOpac">read on...</a>');
+      $(this).append('<a class="less halfOpac">less...</a>');
     });
     $('.less').hide();
   };
@@ -55,6 +54,7 @@ $(function(){
   //Event listener for clicking on Read On
   $('.readOn').on('click', function(){
     var $readOn = $(this);
+    var $imgHide = $readOn.parent().find('img');
     $readOn.hide();
     $imgHide.show();
     $readOn.parent().children('.hidden').addClass('tempAvail');
@@ -67,6 +67,7 @@ $(function(){
   $('.less').on('click', function(){
     console.log('1');
     var $less = $(this);
+    var $imgHide = $less.parent().find('img');
     $less.hide();
     $imgHide.hide();
     $less.prev().show();
