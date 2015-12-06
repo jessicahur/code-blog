@@ -1,16 +1,22 @@
+body{
+  margin: 0;
+  text-align: center;
+}
+.flexbox{
+  display: flex;
+}
+.box{
+  border: solid 1px;
+}
+.halfOpac{
+  opacity: 0.5;
+}
 @media screen and (max-width: 550px){
   /* Base rules*/
-  body{
-    margin: 0;
-    text-align: center;
-  }
   #aboutMe{
     display: none;
   }
   /*Layout rules*/
-  .flexbox{
-    display: flex;
-  }
   .l-navigation{
     position: fixed;
     top:0;
@@ -18,7 +24,7 @@
     background-color: #fff;
   }
   /*Module rules*/
-  #listNavigation, .l-navigation {
+  .dropList, .l-navigation {
     list-style-type: none;
     width: 100%;
     padding: 0;
@@ -54,21 +60,13 @@
   }
   #aboutMe{
     background-color: #fbe0d3;
-
   }
   .l-articles{
-    display: flex;
     background-color: #fbe0d3;
   }
   .articleBody{
     text-align: left;
     padding-left: 10px;
-  }
-  .readOn{
-    opacity: 0.5;
-  }
-  .less{
-    opacity: 0.5;
   }
   .center{
     width: 100%;
@@ -87,29 +85,25 @@
 }
 @media screen and (min-width: 550px){
   /*Base rules*/
-  body{
-    margin: 0;
-    text-align: center;
-  }
   #aboutMe{
     display: none;
   }
   /*Layout rules*/
   .l-header{
-    display: flex;
+    /*display: flex;*/
     background-image: url('../img/flowerBackground.jpg');
     height: 100px;
   }
   .title{
     width: 100%;
     text-align: center;
+    display:block;
   }
   /*Theme rules */
   .dropList{
     background-color: #f6c8c1;
     padding: 16px;
     margin: 0;
-    width: 100%;
     list-style-type: none;
   }
   .dropList li{
@@ -124,7 +118,7 @@
     opacity: 0.5;
   }
   .form{
-    display: flex;
+    /*display: flex;*/
     background-color: #f6c8c1;
   }
   .form form{
@@ -132,15 +126,16 @@
     padding-bottom: 10px;
   }
   .l-articles{
-    display: flex;
     background-color: #fbe0d3;
+  }
+  .article::after{ /*Prevent img overflowing to other article*/
+    content: "";
+    display:table;
+    clear: both;
   }
   .articleBody{
     text-align: left;
-    padding-left: 10px;
-  }
-  .readOn{
-    opacity: 0.5;
+    padding: 0 10px;
   }
   .center{
     width: 100%;
