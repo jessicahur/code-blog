@@ -36,8 +36,7 @@ $(function(){
     var date = getDate();
     myObj.publishedOn = date;
     console.log(JSON.stringify(myObj));
-    //console.log(JSON.stringify(myObj).replace(/\"/g, '\''));
-    $pJson.text(JSON.stringify(myObj).replace(/\"/g, '\''));
+    $pJson.text(JSON.stringify(myObj).replace(/\"/g, '\''));//replace double " with single '
 
     //handlebars here
     var $articleOutput = $('#articles');
