@@ -8,6 +8,8 @@ body{
 }
 .box{
   border: solid 1px;
+  margin: 10px;
+  overflow: scroll;
 }
 .halfOpac{
   opacity: 0.5;
