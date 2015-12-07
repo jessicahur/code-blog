@@ -3,8 +3,22 @@ $(function(){
   articlesArray.sort(Util.compareTimeStamps);
   console.log(articlesArray);
 
-  $.get('template.html', function(response){
-    var rawScriptTemplate = response;
+  $.ajax({
+    type: 'HEAD',
+    url: 'js/blogArticles.json',
+    success: function(data,textStatus,xhr){
+      console.log('ajax successfully runs');
+      eTag = xhr.getResponseHeader('eTag');
+      console.log(eTag);
+      sessionStorage.setItem(eTag,eTag);
+    }
+  });//end of ajax
+
+
+
+
+  $.get('template.html', function(template){
+    var rawScriptTemplate = template;
     var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
     var $articlesSection = $('#articles');
     for (var ii=0; ii<articlesArray.length; ii++){
@@ -13,6 +27,9 @@ $(function(){
       $articlesSection.append($htmlOutput);
     }
     console.log('getting template was run');
+    blog.setTeaser();
+    blog.setFilters();
+    blog.setEventListeners();
   });//end $.get method
 
   blog.setTeaser = function(){
@@ -50,84 +67,86 @@ $(function(){
     }
     console.log('setFilters was run');
   };
-  blog.setTeaser();
-  blog.setFilters();
+  // blog.setTeaser();
+  // blog.setFilters();
   //Event listener for clicking on Read On
-  $('.readOn').on('click', function(){
-    var $readOn = $(this);
-    var $imgHide = $readOn.parent().find('img');
-    $readOn.hide();
-    $imgHide.show();
-    $readOn.parent().children('.hidden').addClass('tempAvail');
-    $('.tempAvail').fadeIn();
-    $readOn.next().show();
-  });
-
-
-  //Event listener for clicking on less...
-  $('.less').on('click', function(){
-    console.log('less event listener was added');
-    var $less = $(this);
-    var $imgHide = $less.parent().find('img');
-    $less.hide();
-    $imgHide.hide();
-    $less.prev().show();
-    $less.parent().children('.hidden').removeClass('tempAvail');
-    $('.hidden').css('display','none');
-  });
-
-  //Event listener for author selection
-  $('#authorFilter').on('change', function(){
-    var author = $(this).val();
-    var $article = $('.article');
-    console.log(author);
-    $article.hide();
-    var $authors = $('.author');
-    $authors.each(function(){
-      var text = $(this).text();
-      if(text===author){
-        $(this).closest('.article').show();
-        //$this.parent('.article').show();
-      }
+  blog.setEventListeners = function(){
+    $('.readOn').on('click', function(){
+      var $readOn = $(this);
+      var $imgHide = $readOn.parent().find('img');
+      $readOn.hide();
+      $imgHide.show();
+      $readOn.parent().children('.hidden').addClass('tempAvail');
+      $('.tempAvail').fadeIn();
+      $readOn.next().show();
     });
 
-  });
 
-  //Event listener for category selection
-  $('#categoryFilter').on('change',function(){
-    var category = $(this).val();
-    var $articles = $('.article');
-    console.log(category);
-    $articles.hide();
-    var $categories = $('.category').find('span');
-    console.log($categories);
-    $categories.each(function(){
-      var text = $(this).text();
-      if(text===category){
-        $(this).closest('.article').show();
-      }
+    //Event listener for clicking on less...
+    $('.less').on('click', function(){
+      console.log('less event listener was added');
+      var $less = $(this);
+      var $imgHide = $less.parent().find('img');
+      $less.hide();
+      $imgHide.hide();
+      $less.prev().show();
+      $less.parent().children('.hidden').removeClass('tempAvail');
+      $('.hidden').css('display','none');
     });
 
-  });
+    //Event listener for author selection
+    $('#authorFilter').on('change', function(){
+      var author = $(this).val();
+      var $article = $('.article');
+      console.log(author);
+      $article.hide();
+      var $authors = $('.author');
+      $authors.each(function(){
+        var text = $(this).text();
+        if(text===author){
+          $(this).closest('.article').show();
+          //$this.parent('.article').show();
+        }
+      });
 
-  //Event listener for clear filter button
-  $('button').on('click', function(e){
-    e.preventDefault();
-    $('#authorFilter').val('--Author--');
-    $('#categoryFilter').val('--Category--');
-    $('.article').show();
-  });
-  //Event listener for About The Author
-  $('#about').on('click', function(){
-    $('#aboutMe').show();
-    $('.article').hide();
-    $('form').hide();
-  });
+    });
 
-  //Event listener for clicking Articles
-  $('#arHome').on('click', function(){
-    $('#aboutMe').hide();
-    $('.article').show();
-    $('form').show();
-  });
+    //Event listener for category selection
+    $('#categoryFilter').on('change',function(){
+      var category = $(this).val();
+      var $articles = $('.article');
+      console.log(category);
+      $articles.hide();
+      var $categories = $('.category').find('span');
+      console.log($categories);
+      $categories.each(function(){
+        var text = $(this).text();
+        if(text===category){
+          $(this).closest('.article').show();
+        }
+      });
+
+    });
+
+    //Event listener for clear filter button
+    $('button').on('click', function(e){
+      e.preventDefault();
+      $('#authorFilter').val('--Author--');
+      $('#categoryFilter').val('--Category--');
+      $('.article').show();
+    });
+    //Event listener for About The Author
+    $('#about').on('click', function(){
+      $('#aboutMe').show();
+      $('.article').hide();
+      $('form').hide();
+    });
+
+    //Event listener for clicking Articles
+    $('#arHome').on('click', function(){
+      $('#aboutMe').hide();
+      $('.article').show();
+      $('form').show();
+    });
+  };
 });//end ready
