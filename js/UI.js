@@ -72,8 +72,6 @@ $(function(){
     e.preventDefault();
     UI.insert();
     Util.setTeaser();
-    blog.rawData.unshift(myObj);
-    console.log(blog.rawData);
   });
 
   UI.insert();

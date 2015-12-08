@@ -32,32 +32,18 @@
   </form>
   <!--Output of Json stringify-->
   <div class="flexbox box">
-      <p id="jsonOutput">
-      </p>
+    <p id="jsonOutput">
+    </p>
   </div>
 
   <div class="l-articles">
     <section id="articles" class="center">
-  <!--Article Preview-->
-    <script id="UserPreview" type="text/x-handlebars-template">
-      <article class="article">
-        <header>
-          <h1 class="articleHeader title">{{title}}</h1>
-          <div class="details">
-            <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
-            <p class="author"><b>{{author}}</b></p>
-            <p class="URL">{{authorUrl}}</p>
-            <p class="category"><i>Category: <span>{{category}}</span></i></p>
-          </div>
-        </header>
-        <section class="articleBody">{{{body}}}</section>
-      </article>
-    </script>
-  </section>
-</div>
+
+    </section>
+  </div>
   <script src="js/Util.js"></script>
   <script src="js/blogObj.js"></script>
   <script src="js/blogArticles.js"></script>
-  <script src="js/UI.js"></script>
+  <script src="js/UIAjax.js"></script>
 </body>
 </html>
