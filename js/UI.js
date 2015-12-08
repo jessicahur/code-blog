@@ -13,12 +13,12 @@ $(function(){
 
   UI.render = function render(){
     var userInput = {
-                      title:     $title,
-                      category:  $category,
-                      author:    $author,
-                      authorUrl: $authorUrl,
-                      body:      $articleBody
-                   };
+      title:     $title,
+      category:  $category,
+      author:    $author,
+      authorUrl: $authorUrl,
+      body:      $articleBody
+    };
     var userInputVal = {};
     var date = getDate();
 
@@ -27,9 +27,10 @@ $(function(){
     }
 
     userInputVal.body = marked(userInputVal.body);
+    console.log(userInputVal.body);
     userInputVal.publishedOn = date;
     return userInputVal;
-  }
+  };
 
   UI.insert = function insert(){
     myObj = UI.render();
@@ -49,7 +50,7 @@ $(function(){
     $articleOutput.append($htmlOutput);
     console.log(myObj);
 
-  }
+  };
 
   //Function to get current date while typing or decide to finalize article
   function getDate(){
@@ -71,8 +72,6 @@ $(function(){
     e.preventDefault();
     UI.insert();
     Util.setTeaser();
-    blog.rawData.unshift(myObj);
-    console.log(blog.rawData);
   });
 
   UI.insert();

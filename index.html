@@ -5,13 +5,16 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
   <link href="css/handlebarsStyling.css" type="text/css" rel="stylesheet"/>
+  <link rel="stylesheet" href="highlight/styles/atelier-dune-light.css">
+  <script src="highlight/highlight.pack.js"></script>
   <script src="js/handlebars-v4.0.5.js"></script>
   <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/marked.min.js"></script>
 </head>
 <body>
   <!--*************Blog Title**************-->
   <div class="l-header flexbox">
-    <h1 id="blogTitle" class="title">The Random Blog</h1>
+    <h1 id="blogTitle" class="title flexbox">The Random Blog</h1>
   </div>
   <!--**********Navigation Bar***********-->
   <div class = "l-navigation">
@@ -48,28 +51,16 @@
     <!--**********Articles Section********** -->
     <div class="l-articles flexbox">
       <section id="articles" class="center" >
-        <!--HandleBars Template and article insertion-->
-        <script id="handlebarsTemplate" type="text/x-handlebars-template">
-          <article class="article">
-            <header>
-              <h1 class="articleHeader title">{{title}}</h1>
-              <div class="details">
-                <p>Published on: {{publishedOn}}<time pubdate datetime="2000-01-01"></time></p>
-                <p class="author"><b>{{author}}</b></p>
-                <p class="URL">{{authorUrl}}</p>
-                <p class="category"><i>Category: <span>{{category}}</span></i></p>
-              </div>
-            </header>
-            <section class="articleBody">{{{body}}}</section>
-          </article>
-        </script>
+      
       </section>
     </div>
     <!--**********Articles Section Ends Here********** -->
     <script src="js/blogObj.js"></script>
     <script src="js/blogArticles.js"></script>
     <script src="js/Util.js"></script>
-    <script src="js/handlebarsScript.js"></script>
+    <script src="js/ajaxCall.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- <script src="js/handlebarsScript.js"></script> -->
     <script src="js/styling.js"></script>
 
   </body>
