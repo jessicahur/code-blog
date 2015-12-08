@@ -50,6 +50,9 @@ $(function(){
       $articleOutput.children().remove();
       $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(myObj.publishedOn))/60/60/24/1000) + ' days ago)');
       $articleOutput.append($htmlOutput);
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
     });//end $.get method
     console.log(myObj);
 
