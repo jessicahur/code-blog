@@ -1,36 +1,65 @@
 $(function(){
-  var articlesArray = blog.rawData.slice();
-  articlesArray.sort(Util.compareTimeStamps);
-  console.log(articlesArray);
 
-  $.ajax({
-    type: 'HEAD',
-    url: 'js/blogArticles.json',
-    success: function(data,textStatus,xhr){
-      console.log('ajax successfully runs');
-      eTag = xhr.getResponseHeader('eTag');
-      console.log(eTag);
-      sessionStorage.setItem(eTag,eTag);
+  var get_ajax = function(){
+    return $.ajax({
+      type: 'HEAD',
+      url: 'js/blogArticles.json',
+    });//end of $.ajax
+  };
+
+  var get_template = function(){
+    console.log(sessionStorage);
+    articlesArray = JSON.parse(sessionStorage.getItem('articlesData'));
+    console.log(articlesArray);
+    articlesArray.sort(Util.compareTimeStamps);
+    $.get('template.html', function(template){
+      var rawScriptTemplate = template;
+      var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
+      var $articlesSection = $('#articles');
+      for (var ii=0; ii<articlesArray.length; ii++){
+        var $htmlOutput = $(compiledScriptTemplate(articlesArray[ii])); //passing data into htmlOutput and make it a jQuery obj
+        $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(articlesArray[ii].publishedOn))/60/60/24/1000) + ' days ago)');
+        $articlesSection.append($htmlOutput);
+      }
+      console.log('getting template was run');
+      blog.setTeaser();
+      blog.setFilters();
+      blog.setEventListeners();
+    });//end $.get method
+  }; //end get_template
+
+  var get_json = function(){
+    sessionStorage.setItem('eTag',eTag);
+    $.getJSON('js/blogArticles.json', function(articlesData){
+      console.log('getJSON is running');
+      //Storing returned data to sessionStorage
+      sessionStorage.setItem('articlesData',JSON.stringify(articlesData));
+      console.log('after sorting articlesArray is:');
+      get_template();
+    });//end of getJSON
+  };//end of get_json
+
+  get_ajax().done(function(data,textStatus,xhr){
+    console.log('ajax successfully runs');
+    eTag = xhr.getResponseHeader('eTag');
+    console.log(eTag);
+    sessionStorageETag = sessionStorage.getItem('eTag');
+    if(sessionStorageETag){
+      if(sessionStorageETag!==eTag){
+        console.log("line 48");
+        get_json();
+      }
+      else{
+        console.log("line 52");
+        get_template();
+      }
     }
-  });//end of ajax
-
-
-
-
-  $.get('template.html', function(template){
-    var rawScriptTemplate = template;
-    var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
-    var $articlesSection = $('#articles');
-    for (var ii=0; ii<articlesArray.length; ii++){
-      var $htmlOutput = $(compiledScriptTemplate(articlesArray[ii])); //passing data into htmlOutput and make it a jQuery obj
-      $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(articlesArray[ii].publishedOn))/60/60/24/1000) + ' days ago)');
-      $articlesSection.append($htmlOutput);
+    else{
+      console.log("line 57");
+      get_json();
     }
-    console.log('getting template was run');
-    blog.setTeaser();
-    blog.setFilters();
-    blog.setEventListeners();
-  });//end $.get method
+  });//end of chaining get_ajax
+
 
   blog.setTeaser = function(){
     $articleBody=$('.articleBody');
