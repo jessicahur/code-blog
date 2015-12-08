@@ -7,11 +7,19 @@ $(function(){
     });//end of $.ajax
   };
 
+  var convertMarkdown = function(arrayOfObj){
+    for (ii = 0; ii<arrayOfObj.length; ii++){
+      if(arrayOfObj[ii].markdown){
+        arrayOfObj[ii].body = marked(arrayOfObj[ii].markdown);
+      }
+    }
+    return arrayOfObj;
+  };
+
   var get_template = function(){
-    console.log(sessionStorage);
     articlesArray = JSON.parse(sessionStorage.getItem('articlesData'));
-    console.log(articlesArray);
     articlesArray.sort(Util.compareTimeStamps);
+    articlesArray = convertMarkdown(articlesArray);
     $.get('template.html', function(template){
       var rawScriptTemplate = template;
       var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
@@ -30,9 +38,8 @@ $(function(){
 
   var get_json = function(){
     sessionStorage.setItem('eTag',eTag);
-    $.getJSON('js/blogArticles.json', function(articlesData){
+    $.getJSON('js/blogArticles1.json', function(articlesData){
       console.log('getJSON is running');
-      //Storing returned data to sessionStorage
       sessionStorage.setItem('articlesData',JSON.stringify(articlesData));
       console.log('after sorting articlesArray is:');
       get_template();
@@ -46,16 +53,16 @@ $(function(){
     sessionStorageETag = sessionStorage.getItem('eTag');
     if(sessionStorageETag){
       if(sessionStorageETag!==eTag){
-        console.log("line 48");
+        console.log('cache miss');
         get_json();
       }
       else{
-        console.log("line 52");
+        console.log('cache hit');
         get_template();
       }
     }
     else{
-      console.log("line 57");
+      console.log('cache miss');
       get_json();
     }
   });//end of chaining get_ajax
