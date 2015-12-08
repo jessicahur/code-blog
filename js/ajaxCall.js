@@ -50,7 +50,7 @@ $(function(){
   };//end of get_json
 
   get_ajax().done(function(data,textStatus,xhr){
-    console.log('ajax successfully runs');
+    console.log(textStatus);
     eTag = xhr.getResponseHeader('eTag');
     console.log(eTag);
     sessionStorageETag = sessionStorage.getItem('eTag');
