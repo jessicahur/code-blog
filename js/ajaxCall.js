@@ -30,6 +30,9 @@ $(function(){
         $articlesSection.append($htmlOutput);
       }
       console.log('getting template was run');
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
       blog.setTeaser();
       blog.setFilters();
       blog.setEventListeners();
