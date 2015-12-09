@@ -43,10 +43,10 @@ $(function(){
   function wordLength(word){
     return word.length;
   }
-  function articleAvgWordLength(article){
+  function articleTotalWordLength(article){
     var articleBodyWordSplit = $(article.body).text().split(/\s+/);
     var articleWordLengthArray = articleBodyWordSplit.map(wordLength);
-    return articleWordLengthArray.reduce(sum)/articleWordLengthArray.length;
+    return articleWordLengthArray.reduce(sum);
   }
   function makeAuthorObj (authorName, authorAvgWordLength){
     var authorObj = {};
@@ -69,9 +69,9 @@ $(function(){
     articlesWordsCountArray = articlesWithAllHTML.map(articleWordCount);
     vanity.totalWordsCount = articlesWordsCountArray.reduce(sum);
     //Calculating avg word length across all articles
-    avgWordLengths = articlesWithAllHTML.map(articleAvgWordLength);
-    console.log(avgWordLengths);
-    vanity.avgWordLength = Math.round(avgWordLengths.reduce(sum)/(avgWordLengths.length));
+    blogTotalWordLengths = articlesWithAllHTML.map(articleTotalWordLength);
+    console.log(blogTotalWordLengths);
+    vanity.avgWordLength = Math.round(blogTotalWordLengths.reduce(sum)/(vanity.totalWordsCount));
     console.log(vanity.avgWordLength);
     //Calculating avg word length for each author
     vanity.authorAndAvgWordLength = [];
@@ -92,9 +92,10 @@ $(function(){
     authorsWithMatchedArticles.forEach(function (authorWithMatchedArticles){
       var authorName = authorWithMatchedArticles[0].author;
       console.log(authorName);
-      authorWordLengthArray = authorWithMatchedArticles.map(articleAvgWordLength);
+      authorWordLengthArray = authorWithMatchedArticles.map(articleTotalWordLength);
       console.log(authorWordLengthArray);
-      authorAvgWordLength = Math.round(authorWordLengthArray.reduce(sum)/(authorWordLengthArray.length)*100)/100;
+      authorWordCountArray = authorWithMatchedArticles.map(articleWordCount);
+      authorAvgWordLength = Math.round(authorWordLengthArray.reduce(sum)/(authorWordCountArray.reduce(sum))*100)/100;
       console.log(authorAvgWordLength);
       vanity.authorAndAvgWordLength.push(makeAuthorObj(authorName,authorAvgWordLength));
     });
@@ -116,15 +117,10 @@ $(function(){
         fillInTemplate();
       }
     }
-      else{
-        console.log('cache miss');
-        get_json();
-      }
+    else{
+      console.log('cache miss');
+      get_json();
+    }
   });
-
-  //
-  //
-  //   }
-  // });//end of chaining get_ajax
 
 });//end of ready
