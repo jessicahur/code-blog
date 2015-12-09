@@ -9,10 +9,20 @@
 </head>
 <body>
   <!--*********Handlebars template here**********-->
-  <h2 id="blogStats">Blog Stats</h2>
-  <script id="Handlebars" type="text/x-handlebars-template">
+  <h2>Blog Stats</h2>
+  <div id="blogStats">
+  </div>
+  <script id="handlebarsTemplate" type="text/x-handlebars-template">
     <p><b>Total number of articles:</b> {{numArticles}} articles</p>
     <p><b>Total number of authors:</b> {{numAuthors}} authors</p>
+    <p><b>Total number of words across all articles:</b> {{totalWordsCount}}</p>
+    <p><b>Average word length across all posts:</b> {{avgWordLength}}</p>
+    <p><b>Average word length by author:</b></p>
+    {{#each authorAndAvgWordLength}}
+
+    <p>{{author}}: {{avgWordLength}}</p>
+
+  {{/each}}
 </script>
   <!--Loading written scripts here-->
   <script src="js/blogObj.js"></script>
