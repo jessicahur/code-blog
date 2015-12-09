@@ -67,3 +67,14 @@ Util.setTeaser = function(){
     $('.hidden').css('display','none');
   });
 };
+
+//Functional functions ???
+function convertMarkdown (elem){
+  if (elem.markdown){
+    elem.body = marked(elem.markdown);
+  }
+  return elem;
+}
+Util.markdownToHtml = function(arrayOfObj){
+  return arrayOfObj.map(convertMarkdown);
+};
