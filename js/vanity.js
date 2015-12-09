@@ -7,10 +7,12 @@ $(function(){
   };
 
   var get_json = function(){
-    sessionStorage.setItem('eTag',eTag);
+    sessionStorage.setItem('eTagVanity',eTag);
     $.getJSON('js/blogArticles1.json', function(articlesData){
       console.log(accumulateInfo(articlesData));
-      sessionStorage.setItem('vanityStats',JSON.stringify(accumulateInfo(articlesData)));
+      vanityStats = accumulateInfo(articlesData);
+      sessionStorage.setItem('vanityStats',JSON.stringify(vanityStats));
+      fillInTemplate();
     });//end of $.getJson
   };//end of get_json
 
@@ -101,10 +103,9 @@ $(function(){
   };
 
   get_ajax().done(function(data,textStatus,xhr){
-    console.log(textStatus);
     eTag = xhr.getResponseHeader('eTag');
     console.log(eTag);
-    sessionStorageETag = sessionStorage.getItem('eTag');
+    sessionStorageETag = sessionStorage.getItem('eTagVanity');
     if(sessionStorageETag){
       if(sessionStorageETag!==eTag){
         console.log('cache miss');
