@@ -1,1 +1,22 @@
 /*Base rules*/
+body{
+  margin: 0;
+  text-align: center;
+}
+.flexbox{
+  display: flex;
+}
+.box{
+  border: solid 1px;
+  margin: 10px;
+  overflow: scroll;
+}
+.halfOpac{
+  opacity: 0.5;
+}
+table{
+  width: 70%;
+  border: solid 1px;
+  padding: 1em;
+  margin: 3em auto;
+}
