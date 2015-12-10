@@ -15,8 +15,14 @@ body{
   opacity: 0.5;
 }
 table{
-  width: 70%;
-  border: solid 1px;
+  width: 40%;
   padding: 1em;
   margin: 3em auto;
+  text-align: center;
+}
+table th{
+  background-color: #656565;
+}
+.items{
+  background-color: #ebfafa;
 }

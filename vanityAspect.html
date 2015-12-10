@@ -16,30 +16,36 @@
   <script id="handlebarsTemplate" type="text/x-handlebars-template">
     <table>
       <tr>
-        <td><b>Total number of articles:</b></td>
+        <th>Items</th>
+        <th>Stats</th>
+      </tr>
+      <tr>
+        <td class="items"><b>Total number of articles:</b></td>
         <td> {{numArticles}} articles</td>
       </tr>
       <tr>
-        <td><b>Total number of authors:</b></td>
+        <td class="items"><b>Total number of authors:</b></td>
         <td> {{numAuthors}} authors</td>
       </tr>
       <tr>
-        <td><b>Total number of words across all articles:</td>
+        <td class="items"><b>Total number of words across all articles:</td>
           <td> {{totalWordsCount}}</p>
           </tr>
           <tr>
-            <td><b>Average word length across all posts:</b></td>
+            <td class="items"><b>Average word length across all posts:</b></td>
             <td> {{avgWordLength}}</td>
           </tr>
         </table>
 
         <table>
           <tr>
+            <th>Authors</th>
+            <th>Average Word Length</th>
           </tr>
 
           {{#each authorAndAvgWordLength}}
           <tr>
-            <td>{{author}}</td>
+            <td class="items">{{author}}</td>
             <td> {{avgWordLength}}</td>
           </tr>
 
