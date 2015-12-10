@@ -3,9 +3,9 @@
   <title>The Random Blog</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
-  <script src="js/handlebars-v4.0.5.js"></script>
-  <script src="js/jquery-2.1.4.min.js"></script>
-  <script src="js/marked.min.js"></script>
+  <script src="js/Libraries/handlebars-v4.0.5.js"></script>
+  <script src="js/Libraries/jquery-2.1.4.min.js"></script>
+  <script src="js/Libraries/marked.min.js"></script>
 </head>
 <body>
   <!--*********Handlebars template here**********-->
@@ -13,23 +13,44 @@
   <div id="blogStats">
   </div>
   <script id="handlebarsTemplate" type="text/x-handlebars-template">
-    <p><b>Total number of articles:</b> {{numArticles}} articles</p>
-    <p><b>Total number of authors:</b> {{numAuthors}} authors</p>
-    <p><b>Total number of words across all articles:</b> {{totalWordsCount}}</p>
-    <p><b>Average word length across all posts:</b> {{avgWordLength}}</p>
-    <p><b>Average word length by author:</b></p>
-    {{#each authorAndAvgWordLength}}
+    <table>
+      <tr>
+        <td><b>Total number of articles:</b></td>
+        <td> {{numArticles}} articles</td>
+      </tr>
+      <tr>
+        <td><b>Total number of authors:</b></td>
+        <td> {{numAuthors}} authors</td>
+      </tr>
+      <tr>
+        <td><b>Total number of words across all articles:</td>
+          <td> {{totalWordsCount}}</p>
+          </tr>
+          <tr>
+            <td><b>Average word length across all posts:</b></td>
+            <td> {{avgWordLength}}</td>
+          </tr>
+        </table>
 
-    <p>{{author}}: {{avgWordLength}}</p>
+        <table>
+          <tr>
+          </tr>
 
-  {{/each}}
-</script>
-  <!--Loading written scripts here-->
-  <script src="js/blogObj.js"></script>
-  <script src="js/blogArticles.js"></script>
-  <script src="js/Util.js"></script>
-  <script src="js/vanity.js"></script>
+          {{#each authorAndAvgWordLength}}
+          <tr>
+            <td>{{author}}</td>
+            <td> {{avgWordLength}}</td>
+          </tr>
+        
+            {{/each}}
+          </tr>
+        </table>
+      </script>
+      <!--Loading written scripts here-->
+      <script src="js/blogObj.js"></script>
+      <script src="js/Util.js"></script>
+      <script src="js/vanity.js"></script>
 
-</body>
+    </body>
 
-</html>
+    </html>

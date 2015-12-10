@@ -69,12 +69,12 @@ Util.setTeaser = function(){
 };
 
 //Functional functions ???
-function convertMarkdown (elem){
+Util.convertMarkdown = function (elem){
   if (elem.markdown){
     elem.body = marked(elem.markdown);
   }
   return elem;
-}
+};
 Util.markdownToHtml = function(arrayOfObj){
   return arrayOfObj.map(convertMarkdown);
 };

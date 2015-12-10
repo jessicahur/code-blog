@@ -2,13 +2,13 @@ $(function(){
   var get_ajax = function(){
     return $.ajax({
       type: 'HEAD',
-      url: 'js/blogArticles.json',
+      url: 'js/Data/blogArticles1.json',
     });//end of $.ajax
   };
 
   var get_json = function(){
     sessionStorage.setItem('eTagVanity',eTag);
-    $.getJSON('js/blogArticles1.json', function(articlesData){
+    $.getJSON('js/Data/blogArticles1.json', function(articlesData){
       console.log(accumulateInfo(articlesData));
       vanityStats = accumulateInfo(articlesData);
       sessionStorage.setItem('vanityStats',JSON.stringify(vanityStats));
