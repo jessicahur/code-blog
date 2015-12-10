@@ -52,13 +52,13 @@ $(function(){
   };
   blog.get_json = function(){
     $.getJSON('js/Data/blogArticles1.json', function(articlesData){
-      localStorage.setItem('eTag',eTag);
+      localStorage.setItem('eTag',eTag);//move to line 60
       console.log(articlesData);
       var articles = articlesData.map(blog.convertMarkdown);
       articles.sort(Util.compareTimeStamps);
       console.log(articles);
       blog.updateDB(articles);
-      blog.makeArticlesFromDB();
+      blog.makeArticlesFromDB();//Should just use articles here instead of going into DB
     });//end of $.getJSON
   };//end of blog.get_json
 
