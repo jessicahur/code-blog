@@ -58,3 +58,18 @@ webDB.execute = function (sql, callback) {
     }
   );
 };
+
+webDB.insertRecord = function (article) {
+  // insert article record into database
+  html5sql.process(
+    [
+      {
+        'sql': 'INSERT INTO articles (title, author, authorUrl, category, publishedOn, body) VALUES (?, ?, ?, ?, ?, ?);',
+        'data': [article.title, article.author, article.authorUrl, article.category, article.publishedOn, article.body],
+      }
+    ],
+    function () {
+      console.log('Success inserting record for ' + article.title);
+    }
+  );
+};
