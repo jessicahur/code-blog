@@ -21,12 +21,31 @@ $(function(){
     webDB.execute('DELETE FROM articles', function(){
       console.log('sucessflly wiped articles DB clean');
     });
-    console.log(articles);
-    var columns = '(title, author, authorUrl, category, publishedOn,body)';
-    console.log(columns);
     articles.forEach(webDB.insertRecord);
   };//end of blog.updateDB
+  blog.makeArticlesFromDB = function(){
+    webDB.execute('SELECT * FROM articles ORDER BY publishedOn DESC', blog.get_template);
+  };
+  blog.get_template = function(articlesInput){
+    var articles = articlesInput;
+    console.log(articles);
+    $.get('templates/template.html', function(template){
+      var rawScriptTemplate = template;
+      var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
+      var $articlesSection = $('#articles');
+      articles.forEach(function(article){
+        var $htmlOutput = $(compiledScriptTemplate(article));
+        $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(article.publishedOn))/60/60/24/1000) + ' days ago)');
+        $articlesSection.append($htmlOutput);
+      });//end of articles.forEach
 
+      blog.setTeaser();
+      webDB.execute('SELECT DISTINCT author FROM articles ORDER BY author;',blog.setAuthorFilter);
+      webDB.execute('SELECT DISTINCT category FROM articles ORDER BY category;',blog.setCategoryFilter);
+      blog.setEventListeners();
+    });//end of $.get()
+
+  };
   blog.get_json = function(){
     $.getJSON('js/Data/blogArticles1.json', function(articlesData){
       localStorage.setItem('eTag',eTag);
@@ -35,6 +54,7 @@ $(function(){
       articles.sort(Util.compareTimeStamps);
       console.log(articles);
       blog.updateDB(articles);
+      blog.get_template(articles);
     });//end of $.getJSON
   };//end of blog.get_json
 
@@ -46,9 +66,12 @@ $(function(){
     if (localStorageETag){
       if (localStorageETag !== eTag){
         console.log('cache miss');
+        webDB.init();
+        blog.get_json();
       }
       else{
         console.log('cache hit');
+        blog.makeArticlesFromDB();
       }
     }
     else{
@@ -73,19 +96,24 @@ $(function(){
     console.log('setTeaser was run');
   };
 
-  blog.setFilters = function(){
-    var tempArticlesArray = articlesArray.slice();
+  blog.setAuthorFilter = function(authorsArray){
+    var authors = [];
+    authorsArray.forEach(function(authorObj){
+      authors.push(authorObj.author);
+    });
     //Creates authors list for author filter
-    tempArticlesArray.sort(Util.compareAuthor);
-    var authors = Util.uniqueItem(tempArticlesArray,'author');
     console.log(authors);
     var $authorSelect=$('#authorFilter');
     for (var ii=0; ii<authors.length;ii++){
       $authorSelect.append('<option>'+authors[ii]+'</option>');
     }
+  };
+  blog.setCategoryFilter = function(categoriesArray){
     //Create categories list for category filter
-    tempArticlesArray.sort(Util.compareCategory);
-    var categories = Util.uniqueItem(tempArticlesArray,'category');
+    var categories = [];
+    categoriesArray.forEach(function(categoryObj){
+      categories.push(categoryObj.category);
+    });
     console.log(categories);
     var $categorySelect=$('#categoryFilter');
     for (var ii=0; ii<categories.length;ii++){
