@@ -23,9 +23,11 @@ $(function(){
     });
     articles.forEach(webDB.insertRecord);
   };//end of blog.updateDB
+
   blog.makeArticlesFromDB = function(){
     webDB.execute('SELECT * FROM articles ORDER BY publishedOn DESC', blog.get_template);
   };
+
   blog.get_template = function(articlesInput){
     var articles = articlesInput;
     console.log(articles);
@@ -38,7 +40,9 @@ $(function(){
         $htmlOutput.find('time').text(' ('+parseInt((new Date() - new Date(article.publishedOn))/60/60/24/1000) + ' days ago)');
         $articlesSection.append($htmlOutput);
       });//end of articles.forEach
-
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
       blog.setTeaser();
       webDB.execute('SELECT DISTINCT author FROM articles ORDER BY author;',blog.setAuthorFilter);
       webDB.execute('SELECT DISTINCT category FROM articles ORDER BY category;',blog.setCategoryFilter);
@@ -54,7 +58,7 @@ $(function(){
       articles.sort(Util.compareTimeStamps);
       console.log(articles);
       blog.updateDB(articles);
-      blog.get_template(articles);
+      blog.makeArticlesFromDB();
     });//end of $.getJSON
   };//end of blog.get_json
 
@@ -66,11 +70,12 @@ $(function(){
     if (localStorageETag){
       if (localStorageETag !== eTag){
         console.log('cache miss');
-        webDB.init();
+        // webDB.init();
         blog.get_json();
       }
       else{
         console.log('cache hit');
+        webDB.connect('blogDB', 'Blog Database', 5*1024*1024);
         blog.makeArticlesFromDB();
       }
     }
@@ -104,9 +109,9 @@ $(function(){
     //Creates authors list for author filter
     console.log(authors);
     var $authorSelect=$('#authorFilter');
-    for (var ii=0; ii<authors.length;ii++){
-      $authorSelect.append('<option>'+authors[ii]+'</option>');
-    }
+    authors.forEach(function(author){
+      $authorSelect.append('<option>'+author+'</option>');
+    });
   };
   blog.setCategoryFilter = function(categoriesArray){
     //Create categories list for category filter
@@ -116,9 +121,9 @@ $(function(){
     });
     console.log(categories);
     var $categorySelect=$('#categoryFilter');
-    for (var ii=0; ii<categories.length;ii++){
-      $categorySelect.append('<option>'+categories[ii]+'</option>');
-    }
+    categories.forEach(function(category){
+      $categorySelect.append('<option>'+category+'</option>');
+    });
     console.log('setFilters was run');
   };
   // blog.setTeaser();
