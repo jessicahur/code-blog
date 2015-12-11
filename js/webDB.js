@@ -34,6 +34,7 @@ webDB.init = function() {
 
 webDB.connect = function (database, title, size) {
   html5sql.openDatabase(database, title, size);
+  console.log('ran webDB.connect');
 };
 
 webDB.setupTables = function () {
