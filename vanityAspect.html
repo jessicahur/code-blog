@@ -3,6 +3,7 @@
   <title>The Random Blog</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1" />
+  <link rel="stylesheet" href="css/vanityStyling.css">
   <script src="js/Libraries/handlebars-v4.0.5.js"></script>
   <script src="js/Libraries/jquery-2.1.4.min.js"></script>
   <script src="js/Libraries/marked.min.js"></script>
@@ -15,33 +16,39 @@
   <script id="handlebarsTemplate" type="text/x-handlebars-template">
     <table>
       <tr>
-        <td><b>Total number of articles:</b></td>
+        <th>Items</th>
+        <th>Stats</th>
+      </tr>
+      <tr>
+        <td class="items"><b>Total number of articles:</b></td>
         <td> {{numArticles}} articles</td>
       </tr>
       <tr>
-        <td><b>Total number of authors:</b></td>
+        <td class="items"><b>Total number of authors:</b></td>
         <td> {{numAuthors}} authors</td>
       </tr>
       <tr>
-        <td><b>Total number of words across all articles:</td>
+        <td class="items"><b>Total number of words across all articles:</td>
           <td> {{totalWordsCount}}</p>
           </tr>
           <tr>
-            <td><b>Average word length across all posts:</b></td>
+            <td class="items"><b>Average word length across all posts:</b></td>
             <td> {{avgWordLength}}</td>
           </tr>
         </table>
 
         <table>
           <tr>
+            <th>Authors</th>
+            <th>Average Word Length</th>
           </tr>
 
           {{#each authorAndAvgWordLength}}
           <tr>
-            <td>{{author}}</td>
+            <td class="items">{{author}}</td>
             <td> {{avgWordLength}}</td>
           </tr>
-        
+
             {{/each}}
           </tr>
         </table>

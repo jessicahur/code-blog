@@ -7,17 +7,17 @@ $(function(){
   };
 
   var get_json = function(){
-    sessionStorage.setItem('eTagVanity',eTag);
-    $.getJSON('js/Data/blogArticles1.json', function(articlesData){
+    $.getJSON('js/Data/blogArticles1.json', function(articlesDataObj){
+      sessionStorage.setItem('eTag',eTag);
+      sessionStorage.setItem('articlesData', JSON.stringify(articlesDataObj));
+      var articlesData = articlesDataObj;
       console.log(accumulateInfo(articlesData));
-      vanityStats = accumulateInfo(articlesData);
-      sessionStorage.setItem('vanityStats',JSON.stringify(vanityStats));
       fillInTemplate();
     });//end of $.getJson
   };//end of get_json
 
   var fillInTemplate = function(){
-    var vanityStats = JSON.parse(sessionStorage.getItem('vanityStats'));
+    var vanityStats = accumulateInfo(JSON.parse(sessionStorage.getItem('articlesData')));
     console.log(vanityStats);
     var rawScriptTemplate = $('#handlebarsTemplate').html();
     var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
@@ -28,7 +28,6 @@ $(function(){
 
   function articleWordCount(article){
     var articleBodyWordCount = $(article.body).text().split(/\s+/).length;
-    // console.log(articleBodyWordCount);
     return articleBodyWordCount;
   };
   function convertMarkdown(elem){
@@ -71,7 +70,7 @@ $(function(){
     //Calculating avg word length across all articles
     blogTotalWordLengths = articlesWithAllHTML.map(articleTotalWordLength);
     console.log(blogTotalWordLengths);
-    vanity.avgWordLength = Math.round(blogTotalWordLengths.reduce(sum)/(vanity.totalWordsCount));
+    vanity.avgWordLength = Math.round(blogTotalWordLengths.reduce(sum)/(vanity.totalWordsCount)*100)/100;
     console.log(vanity.avgWordLength);
     //Calculating avg word length for each author
     vanity.authorAndAvgWordLength = [];
@@ -106,7 +105,7 @@ $(function(){
   get_ajax().done(function(data,textStatus,xhr){
     eTag = xhr.getResponseHeader('eTag');
     console.log(eTag);
-    sessionStorageETag = sessionStorage.getItem('eTagVanity');
+    sessionStorageETag = sessionStorage.getItem('eTag');
     if(sessionStorageETag){
       if(sessionStorageETag!==eTag){
         console.log('cache miss');
