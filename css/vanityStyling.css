@@ -1,4 +1,7 @@
 /*Base rules*/
+*{
+  box-sizing: border-box;
+}
 body{
   margin: 0;
   text-align: center;
@@ -6,23 +9,41 @@ body{
 .flexbox{
   display: flex;
 }
-.box{
-  border: solid 1px;
-  margin: 10px;
-  overflow: scroll;
-}
-.halfOpac{
-  opacity: 0.5;
-}
-table{
-  width: 40%;
-  padding: 1em;
+table {
   margin: 3em auto;
   text-align: center;
+  font-size: 1em;
 }
-table th{
-  background-color: #656565;
+
+th{
+  background-color: #efefef;
+  border-bottom: 2px solid #111111;
+  padding: 1em;
 }
-.items{
-  background-color: #ebfafa;
+tr {
+  background-color: #efefef;
+}
+td{
+  padding: 0.5em;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: #c3e6e5;}
+  
+@media screen and (max-width: 480px){
+  table{
+    width: 90%;
+    min-width: 300px;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 600px){
+  table{
+    width: 90%;
+  }
+}
+@media screen and (min-width: 601px){
+  table{
+    width: 540px;
+  }
 }

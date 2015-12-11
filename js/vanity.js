@@ -28,7 +28,6 @@ $(function(){
 
   function articleWordCount(article){
     var articleBodyWordCount = $(article.body).text().split(/\s+/).length;
-    // console.log(articleBodyWordCount);
     return articleBodyWordCount;
   };
   function convertMarkdown(elem){
@@ -71,7 +70,7 @@ $(function(){
     //Calculating avg word length across all articles
     blogTotalWordLengths = articlesWithAllHTML.map(articleTotalWordLength);
     console.log(blogTotalWordLengths);
-    vanity.avgWordLength = Math.round(blogTotalWordLengths.reduce(sum)/(vanity.totalWordsCount));
+    vanity.avgWordLength = Math.round(blogTotalWordLengths.reduce(sum)/(vanity.totalWordsCount)*100)/100;
     console.log(vanity.avgWordLength);
     //Calculating avg word length for each author
     vanity.authorAndAvgWordLength = [];
