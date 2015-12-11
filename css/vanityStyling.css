@@ -1,0 +1,49 @@
+/*Base rules*/
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  text-align: center;
+}
+.flexbox{
+  display: flex;
+}
+table {
+  margin: 3em auto;
+  text-align: center;
+  font-size: 1em;
+}
+
+th{
+  background-color: #efefef;
+  border-bottom: 2px solid #111111;
+  padding: 1em;
+}
+tr {
+  background-color: #efefef;
+}
+td{
+  padding: 0.5em;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: #c3e6e5;}
+  
+@media screen and (max-width: 480px){
+  table{
+    width: 90%;
+    min-width: 300px;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 600px){
+  table{
+    width: 90%;
+  }
+}
+@media screen and (min-width: 601px){
+  table{
+    width: 540px;
+  }
+}

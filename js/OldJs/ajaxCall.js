@@ -20,7 +20,7 @@ $(function(){
     articlesArray = JSON.parse(sessionStorage.getItem('articlesData'));
     articlesArray.sort(Util.compareTimeStamps);
     articlesArray = convertMarkdown(articlesArray);
-    $.get('template.html', function(template){
+    $.get('template/template.html', function(template){
       var rawScriptTemplate = template;
       var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
       var $articlesSection = $('#articles');
