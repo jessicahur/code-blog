@@ -56,6 +56,9 @@ webDB.execute = function (sql, callback) {
     sql,
     function (tx, result, resultArray) {
       callback(resultArray);
+    },
+    function (error){
+      console.log(error.message);
     }
   );
 };

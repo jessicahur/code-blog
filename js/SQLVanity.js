@@ -59,49 +59,65 @@ $(function(){
     authorObj.avgWordLength = authorAvgWordLength;
     return authorObj;
   };
-
-
-  blog.accumulateInfo = function(){
-    html5sql.process(
-      'SELECT title FROM articles;',
-      function(a,b,returnedArray){
-        vanity.totalNumberOfArticles = returnedArray.length;
-        console.log(vanity.totalNumberOfArticles);
-        call1.resolve();
-      }
-    );//Calculate total number of articles
+  blog.getTotalNumOfArticles = function(returnedArray){
+    vanity.totalNumberOfArticles = returnedArray.length;
     console.log(vanity.totalNumberOfArticles);
-    html5sql.process(
-      'SELECT DISTINCT author FROM articles ORDER BY author;',
-      function(a,b,returnedArray){
-        vanity.totalNumberOfAuthors = returnedArray.length;
-        vanity.distinctAuthors = returnedArray.map(function(obj){
-          return obj.author;
-        });
-        console.log(vanity.totalNumberOfAuthors);
-        call2.resolve();
-      },
-      function(error){
-        console.log(error.message);
-      }
-    );//Calculate total number of distinct authors
-    html5sql.process(
-      'SELECT body FROM articles;',
-      function(a,b,returnedArray){
-        var totalWordLength=[];
-        var bodyArray = returnedArray.map(function(obj){
-          var numberOfWordsPerArt = $(obj.body).text().split(/\s+/);
-          var articleWordLengths = numberOfWordsPerArt.map(blog.wordLength);
-          totalWordLength.push(articleWordLengths.reduce(blog.sum));
-          return numberOfWordsPerArt.length;
-        });
-        vanity.totalNumberOfWordsInBlog = bodyArray.reduce(blog.sum);
-        console.log(vanity.totalNumberOfWordsInBlog);
-        vanity.avgWordLengthAcrossBlog = Math.round(totalWordLength.reduce(blog.sum)/vanity.totalNumberOfWordsInBlog*100)/100;
-        console.log(vanity.avgWordLengthAcrossBlog);
-        call3.resolve();
-      }
-    );//Calculate total number of words in Blog Body and avg word length across blog
+    call1.resolve();
+  };
+  blog.getNumDistAuthors = function(returnedArray){
+    vanity.totalNumberOfAuthors = returnedArray.length;
+    vanity.distinctAuthors = returnedArray.map(function(obj){
+      return obj.author;
+    });
+    console.log(vanity.totalNumberOfAuthors);
+    call2.resolve();
+  };
+  blog.getTotalNumWordsAndAvgWordLengthOfBlog = function (returnedArray){
+    var totalWordLength=[];
+    var bodyArray = returnedArray.map(function(obj){
+      var numberOfWordsPerArt = $(obj.body).text().split(/\s+/);
+      var articleWordLengths = numberOfWordsPerArt.map(blog.wordLength);
+      totalWordLength.push(articleWordLengths.reduce(blog.sum));
+      return numberOfWordsPerArt.length;
+    });
+    vanity.totalNumberOfWordsInBlog = bodyArray.reduce(blog.sum);
+    console.log(vanity.totalNumberOfWordsInBlog);
+    vanity.avgWordLengthAcrossBlog = Math.round(totalWordLength.reduce(blog.sum)/vanity.totalNumberOfWordsInBlog*100)/100;
+    console.log(vanity.avgWordLengthAcrossBlog);
+    call3.resolve();
+  };
+  blog.getAvgWordLengthPerAuthor = function(returnedArray){
+    var authorTotalWordCount = returnedArray.map(blog.articleWordCount);
+    console.log(authorTotalWordCount);
+    var authorTotalWordLength = returnedArray.map(blog.articleTotalWordLength);
+    console.log(authorTotalWordLength);
+    avgWordLengthPerAuthor = Math.round(authorTotalWordLength.reduce(blog.sum)/authorTotalWordCount.reduce(blog.sum)*100)/100;
+    console.log(avgWordLengthPerAuthor);
+    var authorName = returnedArray[0].author;
+    var authorObj = new blog.makeAuthorObj(authorName,avgWordLengthPerAuthor);
+    vanity.authorsWithAvgWordLength.push(authorObj);
+  };
+  blog.accumulateInfo = function(){
+    webDB.execute('SELECT title FROM articles',blog.getTotalNumOfArticles);//Calculate total number of articles
+    webDB.execute('SELECT DISTINCT author FROM articles ORDER BY author;',blog.getNumDistAuthors);//Calculate total number of distinct authors
+    webDB.execute('SELECT body FROM articles;',blog.getTotalNumWordsAndAvgWordLengthOfBlog);//Calculate total number of words in Blog Body and avg word length across blog
+    var deferred = $.when(call1,call2,call3);
+    deferred.done(function(){
+      console.log(vanity);
+      var authors = vanity.distinctAuthors;
+      vanity.authorsWithAvgWordLength = [];
+      authors.forEach(function(authorName){
+        var author = authorName;
+        var sql = 'SELECT author,body FROM articles WHERE author = "'+authorName+'";';
+        console.log(sql);
+        webDB.execute(sql,blog.getAvgWordLengthPerAuthor);
+        call4.resolve();
+      });
+      var finish = $.when(call4);
+      finish.done(function(){
+        console.log(vanity);
+      });
+    });
   };//end of blog.accumulateInfo
 
   blog.get_ajax().done(function(data,textStatus,xhr){
@@ -117,48 +133,39 @@ $(function(){
         console.log('cache hit');
         webDB.connect('blogDB', 'Blog Database', 5*1024*1024);
         blog.accumulateInfo();
-        var deferred = $.when(call1,call2,call3);
-        deferred.done(function(){
-          console.log(vanity);
-          var authors = vanity.distinctAuthors;
-          vanity.authorsWithAvgWordLength = [];
-          authors.forEach(function(authorName){
-            var author = authorName;
-            var sql = 'SELECT author,body FROM articles WHERE author = "'+authorName+'";';
-            console.log(sql);
-            html5sql.process(
-              sql,
-              function(a,b,returnedArray){
-                var objArray = returnedArray;
-                var totalWords = [];
-                var wordLength = [];
-                console.log(objArray);
-                var splitedWords = objArray.map(function(obj){
-                  return $(obj.body).text().split(/\s+/);
-                });
-                splitedWords.forEach(function(array){
-                  array.forEach(function(word){
-                    totalWords.push(word);
-                    wordLength.push(word.length);
-                  });
-                });
-                var authorTotalWordCount = totalWords.length;
-                console.log(authorTotalWordCount);
-                var authorTotalWordLength = wordLength.reduce(blog.sum);
-                var authorAvgWordLength = Math.round(authorTotalWordLength/authorTotalWordCount*100)/100;
-                vanity.authorsWithAvgWordLength.push(blog.makeAuthorObj(author,authorAvgWordLength));
-                call4.resolve();
-              },
-              function(error){
-                console.log(error.message);
-              }
-            );
-          });//end of authors forEach
-          var finish = $.when(call4);
-          finish.done(function(){
-            console.log(vanity);
-          });
-        });//end of test.done
+            // html5sql.process(
+            //   sql,
+            //   function(a,b,returnedArray){ /////////////
+            //     var objArray = returnedArray;
+            //     var totalWords = [];
+            //     var wordLength = [];
+            //     console.log(objArray);
+            //     var splitedWords = objArray.map(function(obj){
+            //       return $(obj.body).text().split(/\s+/);
+            //     });
+            //     splitedWords.forEach(function(array){
+            //       array.forEach(function(word){
+            //         totalWords.push(word);
+            //         wordLength.push(word.length);
+            //       });
+            //     });
+            //     var authorTotalWordCount = totalWords.length; /////
+                // console.log(authorTotalWordCount);
+                // var authorTotalWordLength = wordLength.reduce(blog.sum);
+          //       var authorAvgWordLength = Math.round(authorTotalWordLength/authorTotalWordCount*100)/100;
+          //       vanity.authorsWithAvgWordLength.push(blog.makeAuthorObj(author,authorAvgWordLength));
+          //       call4.resolve();
+          //     },
+          //     function(error){
+          //       console.log(error.message);
+          //     }
+          //   );
+          // });//end of authors forEach
+        //   var finish = $.when(call4);
+        //   finish.done(function(){
+        //     console.log(vanity);
+        //   });
+        // });//end of test.done
         // console.log(vanity);
       }
     }
