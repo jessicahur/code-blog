@@ -4,6 +4,7 @@ $(function(){
   var call1 = $.Deferred();
   var call2 = $.Deferred();
   var call3 = $.Deferred();
+  var call4 = $.Deferred();
   blog.get_ajax = function(){
     return $.ajax({
       type: 'HEAD',
@@ -61,7 +62,6 @@ $(function(){
 
 
   blog.accumulateInfo = function(){
-    var authors;
     html5sql.process(
       'SELECT title FROM articles;',
       function(a,b,returnedArray){
@@ -76,9 +76,6 @@ $(function(){
       function(a,b,returnedArray){
         vanity.totalNumberOfAuthors = returnedArray.length;
         vanity.distinctAuthors = returnedArray.map(function(obj){
-          return obj.author;
-        });
-        authors = returnedArray.map(function(obj){
           return obj.author;
         });
         console.log(vanity.totalNumberOfAuthors);
@@ -120,8 +117,48 @@ $(function(){
         console.log('cache hit');
         webDB.connect('blogDB', 'Blog Database', 5*1024*1024);
         blog.accumulateInfo();
-        var test = $.when(call1,call2,call3);
-        test.done(function(){console.log(vanity);});
+        var deferred = $.when(call1,call2,call3);
+        deferred.done(function(){
+          console.log(vanity);
+          var authors = vanity.distinctAuthors;
+          vanity.authorsWithAvgWordLength = [];
+          authors.forEach(function(authorName){
+            var author = authorName;
+            var sql = 'SELECT author,body FROM articles WHERE author = "'+authorName+'";';
+            console.log(sql);
+            html5sql.process(
+              sql,
+              function(a,b,returnedArray){
+                var objArray = returnedArray;
+                var totalWords = [];
+                var wordLength = [];
+                console.log(objArray);
+                var splitedWords = objArray.map(function(obj){
+                  return $(obj.body).text().split(/\s+/);
+                });
+                splitedWords.forEach(function(array){
+                  array.forEach(function(word){
+                    totalWords.push(word);
+                    wordLength.push(word.length);
+                  });
+                });
+                var authorTotalWordCount = totalWords.length;
+                console.log(authorTotalWordCount);
+                var authorTotalWordLength = wordLength.reduce(blog.sum);
+                var authorAvgWordLength = Math.round(authorTotalWordLength/authorTotalWordCount*100)/100;
+                vanity.authorsWithAvgWordLength.push(blog.makeAuthorObj(author,authorAvgWordLength));
+                call4.resolve();
+              },
+              function(error){
+                console.log(error.message);
+              }
+            );
+          });//end of authors forEach
+          var finish = $.when(call4);
+          finish.done(function(){
+            console.log(vanity);
+          });
+        });//end of test.done
         // console.log(vanity);
       }
     }
