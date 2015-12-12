@@ -55,6 +55,7 @@ webDB.execute = function (sql, callback) {
   html5sql.process(
     sql,
     function (tx, result, resultArray) {
+      array = resultArray;
       callback(resultArray);
     },
     function (error){

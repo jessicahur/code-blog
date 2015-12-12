@@ -22,19 +22,19 @@
       </tr>
       <tr>
         <td class="items"><b>Total number of articles:</b></td>
-        <td> {{numArticles}} articles</td>
+        <td> {{totalNumberOfArticles}} articles</td>
       </tr>
       <tr>
         <td class="items"><b>Total number of authors:</b></td>
-        <td> {{numAuthors}} authors</td>
+        <td> {{totalNumberOfAuthors}} authors</td>
       </tr>
       <tr>
         <td class="items"><b>Total number of words across all articles:</td>
-          <td> {{totalWordsCount}}</p>
+          <td> {{totalNumberOfWordsInBlog}}</p>
           </tr>
           <tr>
             <td class="items"><b>Average word length across all posts:</b></td>
-            <td> {{avgWordLength}}</td>
+            <td> {{avgWordLengthAcrossBlog}}</td>
           </tr>
         </table>
 
@@ -44,7 +44,7 @@
             <th>Average Word Length</th>
           </tr>
 
-          {{#each authorAndAvgWordLength}}
+          {{#each authorsWithAvgWordLength}}
           <tr>
             <td class="items">{{author}}</td>
             <td> {{avgWordLength}}</td>
