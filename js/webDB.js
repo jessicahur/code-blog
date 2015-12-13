@@ -34,6 +34,7 @@ webDB.init = function() {
 
 webDB.connect = function (database, title, size) {
   html5sql.openDatabase(database, title, size);
+  console.log('ran webDB.connect');
 };
 
 webDB.setupTables = function () {
@@ -54,7 +55,26 @@ webDB.execute = function (sql, callback) {
   html5sql.process(
     sql,
     function (tx, result, resultArray) {
+      array = resultArray;
       callback(resultArray);
+    },
+    function (error){
+      console.log(error.message);
+    }
+  );
+};
+
+webDB.insertRecord = function (article) {
+  // insert article record into database
+  html5sql.process(
+    [
+      {
+        'sql': 'INSERT INTO articles (title, author, authorUrl, category, publishedOn, body) VALUES (?, ?, ?, ?, ?, ?);',
+        'data': [article.title, article.author, article.authorUrl, article.category, article.publishedOn, article.body],
+      }
+    ],
+    function () {
+      console.log('Success inserting record for ' + article.title);
     }
   );
 };
