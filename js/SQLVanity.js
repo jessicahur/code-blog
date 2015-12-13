@@ -15,13 +15,20 @@ $(function(){
 
   blog.get_json = function(){
     $.getJSON('js/Data/blogArticles1.json', function(articlesDataObj){
+      var articles = articlesDataObj.map(blog.convertMarkdown);
+      articles.sort(Util.compareTimeStamps);
+      console.log(articles);
+      blog.updateDB(articles);
       localStorage.setItem('eTag',eTag);
-      localStorage.setItem('articlesData', JSON.stringify(articlesDataObj));
-      var articlesData = articlesDataObj;
-      console.log(blog.accumulateInfo(articlesData));
-      blog.fillInTemplate();
     });//end of $.getJson
   };//end of get_json
+
+  blog.updateDB = function(articles){
+    webDB.execute('DELETE FROM articles', function(){
+      console.log('sucessflly wiped articles DB clean');
+    });
+    articles.forEach(webDB.insertRecord);
+  };//end of blog.updateDB
 
   blog.fillInTemplate = function(){
     var vanityStats = JSON.parse(localStorage.getItem('vanityStats'));
@@ -140,20 +147,27 @@ $(function(){
     if(localStorageETag){
       if(localStorageETag!==eTag){
         console.log('cache miss');
-        // blog.get_json();
-      }
-      else{
-        console.log('cache hit');
         webDB.connect('blogDB', 'Blog Database', 5*1024*1024);
+        blog.get_json();
         blog.accumulateInfo();
         $.when(call1,call2,call3,call4,call5).done(function(){
           blog.fillInTemplate();
         });
+
+      }
+      else{
+        console.log('cache hit');
+        blog.fillInTemplate();
       }
     }
     else{
       console.log('cache miss');
-      // blog.get_json();
+      webDB.connect('blogDB', 'Blog Database', 5*1024*1024);
+      blog.get_json();
+      blog.accumulateInfo();
+      $.when(call1,call2,call3,call4,call5).done(function(){
+        blog.fillInTemplate();
+      });
     }
   });
 
