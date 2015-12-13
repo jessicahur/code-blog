@@ -42,7 +42,7 @@ $(function(){
 
     //handlebars here
     var $articleOutput = $('#articles');
-    $.get('template.html', function(template){
+    $.get('templates/template.html', function(template){
       var rawScriptTemplate = template;
       var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
       var $articlesSection = $('#articles');
@@ -64,6 +64,16 @@ $(function(){
     var date = JSON.stringify(dString).slice(1,11);
     return date;
   }
+
+  //Function to send article to DB
+  UI.send = function(){
+    myObj = UI.render();
+    var date = getDate();
+    myObj.publishedOn = date;
+    console.log(myObj);
+    webDB.init();
+    webDB.insertRecord(myObj);
+  };
 
   UI.setTeaser = function(){
     $articleBody=$('.articleBody');
@@ -114,6 +124,7 @@ $(function(){
   //Event listener for submit button in order to finalize the publish date
   $submitButton.on('click', function(e){
     e.preventDefault();
+    UI.send();
     UI.setTeaser();
   });
 
