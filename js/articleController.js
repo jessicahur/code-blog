@@ -1,4 +1,5 @@
 var blog = blog || {};
+var $defer = $.Deferred();
 blog.convertMarkdown = function(elem){
   if (elem.markdown){
     elem.body = marked(elem.markdown);
@@ -46,6 +47,7 @@ blog.get_template = function(articlesInput){
     webDB.execute('SELECT DISTINCT author FROM articles ORDER BY author;',blog.setAuthorFilter);
     webDB.execute('SELECT DISTINCT category FROM articles ORDER BY category;',blog.setCategoryFilter);
     blog.setEventListeners();
+    $defer.resolve();
   });//end of $.get()
 
 };
@@ -195,11 +197,13 @@ blog.setEventListeners = function(){
   });
 };
 blog.about = function(){
-  console.log('about page runs');
-  localStorage.setItem('about','aboutrun');
-  $('#aboutMe').show();
-  $('.article').hide();
-  $('form').hide();
+  $defer.done(function(){
+    console.log('about page runs');
+    localStorage.setItem('about','aboutrun');
+    $('#aboutMe').show();
+    $('.article').hide();
+    $('form').hide();
+  });
 };
 blog.home = function(){
   $('#aboutMe').hide();

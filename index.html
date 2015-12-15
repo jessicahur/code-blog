@@ -64,26 +64,6 @@
     <script src="js/articleController.js"></script>
     <script src="js/routing.js"></script>
     <script src="js/styling.js"></script>
-    <script>
-
-    function about(){
-      console.log('about page runs');
-      localStorage.setItem('about','aboutrun');
-      $('#aboutMe').show();
-      $('.article').hide();
-      $('form').hide();
-    };
-    function home(){
-      $('#aboutMe').hide();
-      $('.article').show();
-      $('form').show();
-    }
-    page.base('/');
-    page('', home);
-    page('about',about);
-    page();
-
-    </script>
 
 
   </body>
