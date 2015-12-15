@@ -201,7 +201,6 @@ blog.setEventListeners = function(){
     $('.article').show();
   });
 };
-
 //Functions that get called for page.js
 blog.about = function(){
   $defer.done(function(){
