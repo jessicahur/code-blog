@@ -12,7 +12,7 @@
   <script src="js/Libraries/marked.min.js"></script>
   <script src="js/Libraries/html5sql.js"></script>
   <script src="js/Libraries/page.js"></script>
-  <base href="/" >
+
 </head>
 <body>
   <!--*************Blog Title**************-->
@@ -22,8 +22,8 @@
   <!--**********Navigation Bar***********-->
   <div class = "l-navigation">
     <ul id="listNavigation" class="dropList navigationBar">
-      <li id="arHome"><img src="img/article.png" width="16px"/><span>Articles</span></li>
-      <li id="about"><img src="img/about.png" width="16px"/><span class="navigation"><a href = "./about">About</a></span></li>
+      <li id="arHome"><img src="img/article.png" width="16px"/><span><a href="/">Articles</a></span></li>
+      <li id="about"><img src="img/about.png" width="16px"/><span class="navigation"><a href = "/about">About</a></span></li>
       <li><a><img src="img/twitterLogo.png" width="16px"/><span class="navigation">Twitter</span></a></li>
       <li><a href="http://github.com"><img src="img/GitHub-icon.png" width="16px"/><span class="navigationItem">Github</span></a></li>
       <li><img id="menuIcon" src="img/menuIcon.png"/></li>
@@ -62,15 +62,15 @@
     <script src="js/webDB.js"></script>
     <!-- <script src="js/SQLBlog.js"></script> -->
     <script src="js/articleController.js"></script>
-    <script src="js/routing.js"></script>
+    <!-- <script src="js/routing.js"></script> -->
     <script src="js/styling.js"></script>
-    <!-- <script>
-      blog.index();
+    <script>
       page.base('/');
-      page('/', blog.index);
-      page('/about',blog.about);
+      page('', blog.index);
+      page('/about',about);
+      page();
+    </script>
 
-    </script> -->
 
   </body>
 

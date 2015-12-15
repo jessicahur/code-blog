@@ -140,7 +140,6 @@ blog.setEventListeners = function(){
     $readOn.next().show();
   });
 
-
   //Event listener for clicking on less...
   $('.less').on('click', function(){
     console.log('less event listener was added');
@@ -194,10 +193,6 @@ blog.setEventListeners = function(){
     $('#categoryFilter').val('--Category--');
     $('.article').show();
   });
-  //Event listener for About The Author
-  $('#about').on('click', function(){
-    page('/about',blog.about);
-  });
 
   //Event listener for clicking Articles
   $('#arHome').on('click', function(){
@@ -206,5 +201,5 @@ blog.setEventListeners = function(){
     $('form').show();
   });
 };
-
+blog.index();
 /*Functions definitions for page.js */
