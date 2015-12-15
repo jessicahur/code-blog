@@ -96,9 +96,14 @@ blog.setTeaser = function(){
   $imgHide.hide();
   $articleHide.addClass('hidden');
   $('.hidden').css('display','none');
+  var articleId = 0;
   $articleBody.each(function(){
+    var url = './'+articleId;
+    $(this).closest('.article').attr('id',articleId);
+    // $(this).prepend('<a class="halfOpac" href ="'+url+'"'+'>Share</a>');
     $(this).append('<a class="readOn halfOpac">read on...</a>');
     $(this).append('<a class="less halfOpac">less...</a>');
+    articleId++;
   });
   $('.less').hide();
   console.log('setTeaser was run');
@@ -196,10 +201,11 @@ blog.setEventListeners = function(){
     $('.article').show();
   });
 };
+
+//Functions that get called for page.js
 blog.about = function(){
   $defer.done(function(){
     console.log('about page runs');
-    localStorage.setItem('about','aboutrun');
     $('#aboutMe').show();
     $('.article').hide();
     $('form').hide();
@@ -209,6 +215,17 @@ blog.home = function(){
   $('#aboutMe').hide();
   $('.article').show();
   $('form').show();
+};
+blog.share = function(ctx){
+  var article = ctx.params.page;
+  var selector = '#'+article;
+  console.log(selector);
+  $defer.done(function(){
+    $('.article').hide();
+    $(selector).show();
+    var test = $(selector);
+    console.log(test[0]);
+  });
 };
 blog.index();
 /*Functions definitions for page.js */
