@@ -1,5 +1,6 @@
 var blog = blog || {};
 $(function(){
+
   blog.convertMarkdown = function(elem){
     if (elem.markdown){
       elem.body = marked(elem.markdown);
@@ -85,7 +86,7 @@ $(function(){
       blog.get_json();
     }
   });//end of blog.get_ajax().done()
-
+  
   blog.setTeaser = function(){
     $articleBody=$('.articleBody');
     var $articleHide=$articleBody.children(':not(:first-child)');
@@ -195,10 +196,9 @@ $(function(){
       $('.article').show();
     });
     //Event listener for About The Author
-    $('#about').on('click', function(){
-      $('#aboutMe').show();
-      $('.article').hide();
-      $('form').hide();
+    $('#about').on('click', function(e){
+      page('/about',blog.about);
+      e.preventDefault();
     });
 
     //Event listener for clicking Articles
