@@ -193,13 +193,18 @@ blog.setEventListeners = function(){
     $('#categoryFilter').val('--Category--');
     $('.article').show();
   });
-
-  //Event listener for clicking Articles
-  $('#arHome').on('click', function(){
-    $('#aboutMe').hide();
-    $('.article').show();
-    $('form').show();
-  });
+};
+blog.about = function(){
+  console.log('about page runs');
+  localStorage.setItem('about','aboutrun');
+  $('#aboutMe').show();
+  $('.article').hide();
+  $('form').hide();
+};
+blog.home = function(){
+  $('#aboutMe').hide();
+  $('.article').show();
+  $('form').show();
 };
 blog.index();
 /*Functions definitions for page.js */
