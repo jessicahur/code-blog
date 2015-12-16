@@ -1,5 +1,6 @@
 var blog = blog || {};
 var $defer = $.Deferred();
+var $deferGithub = $.Deferred();
 blog.convertMarkdown = function(elem){
   if (elem.markdown){
     elem.body = marked(elem.markdown);
@@ -63,7 +64,29 @@ blog.get_json = function(){
   });//end of $.getJSON
 };//end of blog.get_json
 
+blog.github = function(){
+  $.ajax({
+    url:  'https://api.github.com/users/jessicahur/repos',
+    type: 'GET',
+    dataType: 'JSON',
+    data: 'Authorization: f23456f5bbe8a91be9940329741272b570e4f394'
+  }).done(function(returnedObj){
+    var github = returnedObj;
+    console.log(github);
+    $.get('templates/github.html', function(template){
+      var rawScriptTemplate = template;
+      var compiledScriptTemplate = Handlebars.compile(rawScriptTemplate);
+      var $githubSection = $('#github');
+      var htmlOutput = compiledScriptTemplate(github);
+      $githubSection.append(htmlOutput);
+      $githubSection.hide();
+      $deferGithub.resolve();
+    });//end of $.get
+  });//end of $.ajax.done
+};//end of blog.github
+
 blog.index = function(){
+  blog.github();
   blog.get_ajax().done(function(data,textStatus,xhr){
     eTag = xhr.getResponseHeader('eTag');
     console.log(eTag);
@@ -226,5 +249,13 @@ blog.share = function(ctx){
     console.log(test[0]);
   });
 };
+blog.showGithub = function (){
+  $.when($deferGithub,$defer).done(function(){
+    $('#github').show();
+    $('.article').hide();
+    $('form').hide();
+  });
+};
+
 blog.index();
 /*Functions definitions for page.js */
