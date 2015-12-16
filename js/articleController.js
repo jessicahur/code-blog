@@ -66,10 +66,10 @@ blog.get_json = function(){
 
 blog.github = function(){
   $.ajax({
-    url:  'https://api.github.com/users/jessicahur/repos',
+    url:  'https://api.github.com/users/jessicahur/repos'+'?per_page=100' +
+          '&sort=updated',
     type: 'GET',
-    dataType: 'JSON',
-    data: 'Authorization: f23456f5bbe8a91be9940329741272b570e4f394'
+    dataType: 'JSON'
   }).done(function(returnedObj){
     var github = returnedObj;
     console.log(github);
@@ -79,7 +79,6 @@ blog.github = function(){
       var $githubSection = $('#github');
       var htmlOutput = compiledScriptTemplate(github);
       $githubSection.append(htmlOutput);
-      $githubSection.hide();
       $deferGithub.resolve();
     });//end of $.get
   });//end of $.ajax.done
@@ -249,13 +248,13 @@ blog.share = function(ctx){
     console.log(test[0]);
   });
 };
-blog.showGithub = function (){
-  $.when($deferGithub,$defer).done(function(){
-    $('#github').show();
-    $('.article').hide();
-    $('form').hide();
-  });
-};
+// blog.showGithub = function (){
+//   $.when($deferGithub,$defer).done(function(){
+//     $('#github').show();
+//     $('.article').hide();
+//     $('form').hide();
+//   });
+// };
 
 blog.index();
 /*Functions definitions for page.js */
