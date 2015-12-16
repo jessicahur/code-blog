@@ -31,7 +31,7 @@ body{
     background-color: #fff;
   }
   /*Module rules*/
-  .dropList, .l-navigation {
+  .dropList, .l-navigation, .listing {
     list-style-type: none;
     width: 100%;
     padding: 0;
