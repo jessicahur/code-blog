@@ -1,0 +1,12 @@
+{{#each this}}
+  <div class="repo">
+    <h3>{{name}}</h3>
+      <p>Created at: {{created_at}}</p>
+      <p>HTML URL: <a href = {{html_url}}> {{html_url}}</a></p>
+      <p>Clone URL: <a href = {{clone_url}}>{{clone_url}}</a></p>
+      <p>Size: {{size}}</p>
+      <p>Language: {{language}}</p>
+      <p>Description: {{description}}</p>
+      <p class="events"></p>
+  </div>
+  {{/each}}

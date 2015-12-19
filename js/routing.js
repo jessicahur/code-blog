@@ -5,6 +5,7 @@
 /*Page Implementation*/
 page.base('/');
 page('', blog.home);
-page('about',reposController.index);
+page('about',blog.about);
 page(':page', blog.share);
+
 page();
