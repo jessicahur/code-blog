@@ -1,6 +1,5 @@
 var blog = blog || {};
 var $defer = $.Deferred();
-var $deferGithub = $.Deferred();
 blog.convertMarkdown = function(elem){
   if (elem.markdown){
     elem.body = marked(elem.markdown);
@@ -19,6 +18,7 @@ blog.get_ajax = function(){
 };//end of blog.get_ajax
 
 blog.updateDB = function(articles){
+  console.log(articles);
   webDB.execute('DELETE FROM articles', function(){
     console.log('sucessflly wiped articles DB clean');
   });
@@ -79,7 +79,6 @@ blog.github = function(){
       var $githubSection = $('#github');
       var htmlOutput = compiledScriptTemplate(github);
       $githubSection.append(htmlOutput);
-      $deferGithub.resolve();
     });//end of $.get
   });//end of $.ajax.done
 };//end of blog.github
@@ -237,24 +236,6 @@ blog.home = function(){
   $('.article').show();
   $('form').show();
 };
-blog.share = function(ctx){
-  var article = ctx.params.page;
-  var selector = '#'+article;
-  console.log(selector);
-  $defer.done(function(){
-    $('.article').hide();
-    $(selector).show();
-    var test = $(selector);
-    console.log(test[0]);
-  });
-};
-// blog.showGithub = function (){
-//   $.when($deferGithub,$defer).done(function(){
-//     $('#github').show();
-//     $('.article').hide();
-//     $('form').hide();
-//   });
-// };
 
 blog.index();
 /*Functions definitions for page.js */
