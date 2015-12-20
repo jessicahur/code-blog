@@ -6,5 +6,4 @@
 page.base('/');
 page('', blog.home);
 page('about',blog.about);
-
 page();
